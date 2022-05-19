@@ -1,0 +1,38 @@
+.icon-fav {
+  @include pxRem(right, 20);
+  @include pxRem(bottom, 20);
+  @include pxRem(font-size, 20);
+  color: wheat;
+  &:hover {
+    @include pxRem(font-size, 24);
+    @include pxRem(right, 18);
+    @include pxRem(bottom, 18);
+    cursor: pointer;
+    color: rgb(244, 176, 87);
+  }
+}
+.icon-fav.active {
+  color: rgb(183, 6, 6);
+}
+.icon-fav-header {
+  @include pxRem(right, 20);
+  @include pxRem(bottom, 20);
+  @include pxRem(font-size, 18);
+  color: map-get($colors, txt-hover);
+  position: absolute;
+}
+.fav-count {
+  @include pxRem(top, 8);
+  @include pxRem(left, 30);
+  @include pxRem(height, 18);
+  @include pxRem(width, 18);
+  @include pxRem(font-size, 12);
+  @include pxRem(line-height, 18);
+  font-weight: map-get($font-weight, medium);
+  color: map-get($colors, white);
+  position: absolute;
+  border-radius: 50%;
+  background-color: map-get($colors, txt-hover);
+  text-align: center;
+  vertical-align: middle;
+}

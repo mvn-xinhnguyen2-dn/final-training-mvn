@@ -1,0 +1,66 @@
+.page-header {
+  background: map-get($colors, bg-gray);
+  text-align: center;
+  background-color: map-get($colors, white);
+  color: map-get($colors, white);
+  border: 2px solid map-get($colors, bg-blue-dark);
+  margin-bottom: 1px;
+  .container {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.header-left {
+  .brand-title {
+    .brand-name {
+      @include pxRem(font-size, 22)
+    }
+  }
+}
+.header-right {
+  border-bottom: 80px solid map-get($colors,bg-blue-dark );
+  border-left: 90px solid transparent;
+  height: 0;
+  width: 100%;
+  justify-content: space-around;
+  &-nav {
+    &-list {
+      font-size: 18px;
+    }
+    &-item {
+      a {
+        color: map-get($colors, white);
+        &:hover {
+          color: map-get($colors, txt-hover);
+        }
+        &.active {
+          color: map-get($colors, txt-hover);
+        }
+      }
+      .menu-sub {
+        &-item {
+          padding: auto;
+        }
+      }
+    }
+  }
+}
+.social-list {
+  .social-item {
+    a:-webkit-any-link {
+      color: map-get($colors, white);
+    }
+    color: map-get($colors, white);
+    font-size: 18px;
+    position: relative;
+    a:hover {
+      color: map-get($colors, txt-hover);
+    }
+  }
+  .false {
+    display: none;
+  }
+  .true {
+    display: block;
+  }
+}

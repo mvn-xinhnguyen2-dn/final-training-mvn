@@ -1,0 +1,17 @@
+.product-detail {
+  .product-brief {
+    background-color: rgba(184, 181, 181, 0.132);
+  }
+  .image {
+  @include pxRem(width, 500);
+  @include pxRem(height, 500);
+    object-fit: cover;
+  }
+  .breadcrumbs {
+    a {
+      @include pxRem(padding, 20);
+    }
+    background-color: antiquewhite;
+    @include pxRem(padding, 15);
+  }
+}

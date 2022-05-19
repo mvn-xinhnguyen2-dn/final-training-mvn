@@ -1,0 +1,20 @@
+table {
+  @include pxRem(max-width, 1024);
+  border-collapse: collapse;
+  th, td {
+    @include pxRem(padding, 10);
+    border: 1px solid map-get($colors, border-gray);
+  }
+}
+.ant-spin-container {
+  @include pxRem(max-width, 1024);
+}
+.ant-table-wrapper {
+  @include pxRem(padding, 30)
+
+}
+.ant-table-thead {
+  tr {
+    background-color: map-get($colors, bg-gray-light ) !important;
+  }
+}

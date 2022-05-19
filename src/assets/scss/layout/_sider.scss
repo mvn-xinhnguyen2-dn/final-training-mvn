@@ -1,0 +1,37 @@
+.sider-nav {
+  h4 {
+    @include pxRem(margin-top, 20);
+    color: map-get($colors, white);
+    text-align: center;
+  }
+  &-item {
+    @include pxRem(padding, 10);
+    @include pxRem(margin-left, 20);
+    
+    a {
+      display: flex;
+      gap: 20px;
+      width: 70%;
+      color: map-get($colors, white );
+      &:hover,
+      &.active {
+        color: map-get($colors, txt-hover )
+      }
+    }
+    &-name {
+      @include pxRem(padding-left, 20);
+      // transition:all 0.2s;
+      text-align: left;
+    }
+  }
+}
+
+.ant-layout-sider-collapsed {
+  h3 {
+    display: none;
+  }
+  .sider-nav-item-name {
+    display: none;
+
+  }
+}
