@@ -2,7 +2,6 @@ import { Form, Input, InputNumber, Button, Select, Radio, message } from "antd";
 import { Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
-
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -35,10 +34,9 @@ const normFile = (e) => {
 export default function AddTutorForm(props) {
   const [form] = Form.useForm();
   const dataTutors = props.dataTutors;
-  console.log(dataTutors)
-
 
   const onFinish = (values) => {
+    console.log(values)
     const id = `t${Math.floor(Math.random() * 101)}`;
     const avatarLink = values.avatar[0].thumbUrl
     const newTutor = {
@@ -61,7 +59,7 @@ export default function AddTutorForm(props) {
   };
   
   return (
-    <div className="form form-add-class">
+    <div className="form form-add-class tutor">
       <Form
         form ={form}
         {...layout}
@@ -139,13 +137,10 @@ export default function AddTutorForm(props) {
         <Form.Item name="avatar" label="Avatar" 
           valuePropName="fileList" 
           getValueFromEvent={normFile}
-          extra="longgggggggggggggggggggggggggggggggggg"
         >
           <Upload
               // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              
               listType="picture"
-              
             >
               <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload>

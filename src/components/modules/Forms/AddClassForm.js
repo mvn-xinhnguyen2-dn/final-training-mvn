@@ -24,9 +24,7 @@ export default function AddClassForm(props) {
   const dataClasses = props.dataClasses;
 
   const onFinish = (values) => {
-    const id = `c${
-      parseInt(dataClasses[dataClasses.length - 1].id.slice(1, 3)) + 1
-    }`;
+    const id = `c${Math.floor(Math.random() * 101)}`;
     const newClass = {
       key: id,
       id,
@@ -40,8 +38,8 @@ export default function AddClassForm(props) {
       nameParent: values.nameParent,
       genderOfParent: values.genderOfParent,
       genderOfStudent: values.genderOfStudent,
+      status: true
     };
-    console.log(newClass);
     dataClasses.push(newClass);
     localStorage.setItem("classes", JSON.stringify(dataClasses));
     form.resetFields()

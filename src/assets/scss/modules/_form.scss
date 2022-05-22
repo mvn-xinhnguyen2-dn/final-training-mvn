@@ -78,9 +78,12 @@ label {
   @include pxRem(margin, 20 auto);
   @include pxRem(padding, 20);
   border: 1px solid;
-  width: 90%;
+  width: 85%;
   .ant-form-item-label {
     text-align: left;
+  }
+  &.tutor {
+    width: 65%;
   }
 }
 

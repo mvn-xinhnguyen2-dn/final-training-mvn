@@ -6,16 +6,16 @@ import { useSelector } from "react-redux";
 
 export default function Header() {
   const favs = useSelector((state) => state.fav.value);
-  const { isLogger , logout } = useAuth();
+  const { isLogger, logout } = useAuth();
 
   const user = JSON.parse(localStorage.getItem("user"));
-  const data = JSON.parse(localStorage.getItem("accounts"))
+  const data = JSON.parse(localStorage.getItem("accounts"));
 
-  let findName=[{name: ""}]
-  if (isLogger===true) {
+  let findName = [{ name: "" }];
+  if (isLogger === true) {
     findName = data.find((item) => {
-        return user.email === item.email 
-      });
+      return user.email === item.email;
+    });
   }
 
   return (
@@ -52,13 +52,13 @@ export default function Header() {
             </nav>
             <ul className="social-list mt-10 flex">
               <li className={`social-item p-15 ${!isLogger}`}>
-                <Link to="/auth/login" >
+                <Link to="/auth/login">
                   <FaSignInAlt />
                 </Link>
               </li>
               <li className={`social-item p-15 ${isLogger}`}>
-                <Link to="/admin/account">
-                  {isLogger ? (<span>Hi {findName.name}!</span>) : <span></span>}
+                <Link to="/admin/accounts">
+                  {isLogger ? <span>{findName.name}!</span> : <span></span>}
                 </Link>
               </li>
               <li className="social-item p-15">

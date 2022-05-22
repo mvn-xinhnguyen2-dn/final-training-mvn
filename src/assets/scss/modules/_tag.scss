@@ -1,0 +1,7 @@
+.tag {
+  @include pxRem(font-size, 14);
+  @include pxRem(margin-right, 0);
+  @include pxRem(margin-left, 5);
+  text-align: center;
+  cursor: pointer;
+}

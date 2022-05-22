@@ -1,7 +1,7 @@
 .page-footer {
   @include pxRem(padding, 10);
   @include pxRem(line-height, 28);
-  background: map-get($colors, bg-gray);
+  background: map-get($colors, bg-blue-dark);
   text-align: center;
-  background-color: black;
+  color: map-get($colors, white);
 }

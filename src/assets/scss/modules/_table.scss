@@ -15,6 +15,31 @@ table {
 }
 .ant-table-thead {
   tr {
-    background-color: map-get($colors, bg-gray-light ) !important;
+    background-color: map-get($colors, bg-gray ) !important;
+  }
+}
+.ant-table-tbody > tr > td {
+  @include pxRem(padding, 0 10 !important) ;
+}
+
+.ant-table-tbody > tr:hover {
+  background-color: map-get($colors, bg-gray )!important;
+}
+.ant-table-cell {
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  text-align: center !important;
+}
+
+.tutor-detail {
+  align-items: center;
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 10px;
   }
 }

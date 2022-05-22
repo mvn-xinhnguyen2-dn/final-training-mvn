@@ -1,5 +1,6 @@
 import AddClassForm from "./AddClassForm";
-import UpdateClass from "./UpdateClass";
+import UpdateClassForm from "./UpdateClassForm";
 import AddTutorForm from "./AddTutorForm";
+import UpdateTutorForm from "./UpdateTutorForm";
 
-export { AddClassForm, UpdateClass, AddTutorForm };
+export { AddClassForm, UpdateClassForm, AddTutorForm, UpdateTutorForm };

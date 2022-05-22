@@ -1,18 +1,20 @@
-import { Table, Input, Button, Space, Modal } from "antd";
+import { Table, Input, Button, Space, Modal , Tag } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
+import { FaEdit, FaTrashAlt, FaRegEye, FaPlusCircle } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 
-import UpdateTutor from "../../Forms/UpdateTutor";
+import UpdateTutorForm from "../../Forms/UpdateTutorForm";
 
-export default function ParentTable() {
+export default function TutorTable() {
   const data = JSON.parse(localStorage.getItem("tutors")) || [];
   const items = data.map((item) =>(
     {key : item.id,
     ...item
     }))
-  const [dataTutors, setDataTutors] = useState(items);
+  const [dataTutors, setDataTutors] = useState(items.reverse());
 
   const handleDelete = (id) => {
     Modal.confirm({
@@ -21,7 +23,7 @@ export default function ParentTable() {
         const newData = dataTutors.filter((e) => {
           return e.id !== id;
         });
-        setDataTutors(newData);
+        setDataTutors(newData)
         localStorage.setItem("tutors", JSON.stringify(newData));
       },
     });
@@ -29,11 +31,11 @@ export default function ParentTable() {
 
   const handleEdit = (itemUpdate) => {
     Modal.info({
+      width: 750,
       title: `Edit Tutor id : ${itemUpdate.id}`,
       content: (
         <>
-          <div>heleo</div>
-          <UpdateTutor itemUpdate={itemUpdate} dataTutors = {dataTutors} />
+          <UpdateTutorForm tutorItem={itemUpdate} dataTutors = {dataTutors} />
         </>
       ),
       onOk: () => {
@@ -41,16 +43,26 @@ export default function ParentTable() {
       },
       okText: "Close"
     });
+
+
   };
-  const handleSeeDetail = (id) => {
-    Modal.info({
-      title: `Information of class id : ${id}`,
+  const handleSeeDetail = (item) => {
+    Modal.success({
+      title: `Information of tutor id : ${item.id}`,
       content: (
-        <>
-          <div>heleo</div>
-          <div>heleo</div>
-          <div>heleo</div>
-        </>
+        <div className="tutor-detail flex">
+          <div>
+            <img src={item.avatar} alt="avatar" />
+          </div>
+          <div>
+            <div>Name: {item.fullName}</div>
+            <div>Gender: {item.gender===0? "Male" : "Female"}</div>
+            <div>Experience: {item.experience}</div>
+            <div>Year: {item.yearOfBirth}</div>
+            <div>Phone: {item.phone}</div>
+            <div>Area: {item.area}</div>
+          </div>
+        </div>
       ),
       onOk: () => {
         console.log("ok")
@@ -130,10 +142,9 @@ export default function ParentTable() {
 
   const columns = [
     {
-      title: "Id",
-      dataIndex: "id",
+      title: "STT",
       key: "id",
-      render: (text) => <p>{text}</p>,
+      render: (a) => (<p>{dataTutors.indexOf(a)+1}</p>)
     },
     {
       title: "Avatar",
@@ -152,37 +163,48 @@ export default function ParentTable() {
       title: "Year",
       dataIndex: "yearOfBirth",
       key: "yearOfBirth",
+      ...getColumnSearchProps("yearOfBirth"),
     },
     {
       title: "Gender",
-      dataIndex: "gender",
+      // dataIndex: "gender",
       key: "gender",
+      render: (a) => (a.gender === 0? <p>Male</p> : <p>Female</p>)
     },
     {
       title: "Experience",
       dataIndex: "experience",
       key: "experience",
+      ...getColumnSearchProps("experience"),
     },
     {
       title: "Area",
       dataIndex: "area",
       key: "area",
+      ...getColumnSearchProps("area"),
     },
     {
       title: "Action",
       key: "action",
       render: (a) => (
         <Space size="middle">
-          <button onClick={() => handleSeeDetail(a.id)}>Detail</button>
-          <button onClick={() => handleEdit(a)}>Edit</button>
-          <button onClick={() => handleDelete(a.id)}>Delete</button>
+          <button className="btn none" onClick={() => handleSeeDetail(a)}><FaRegEye /></button>
+          <button className="btn none" onClick={() => handleEdit(a)}><FaEdit /></button>
+          {/* <Link to={`/admin/manage-tutors/edit-${a.id}`} className="btn none"><FaEdit /></Link> */}
+          <button className="btn none" onClick={() => handleDelete(a.id)}><FaTrashAlt /></button>
         </Space>
       ),
     },
   ];
   return (
     <>
-      <Link to="/admin/add-tutor" className="btn">Add new</Link>
+    <div className="title-table flex">
+        <h3>TUTOR LIST</h3>
+        <Tag color="blue" className="tag">
+          <FaPlusCircle className="mt-5 mr-5" />
+          <Link to="/admin/manage-tutors/add-tutor">Add new</Link>
+        </Tag>
+      </div>
       <Table columns={columns} dataSource={dataTutors} />
     </>
   )

@@ -11,37 +11,33 @@ const layout = {
 };
 
 /* eslint-disable no-template-curly-in-string */
-
 const validateMessages = {
   required: "${label} is required!",
-  types: {
-    number: "${label} is not a valid number!",
-  },
 };
 /* eslint-enable no-template-curly-in-string */
 
-export default function UpdateClass(props) {
-  const dataClasses = props.dataClasses;
-  const isEditingClass = props.itemUpdate;
+export default function UpdateClassForm(props) {
   const [form] = Form.useForm();
+  const dataClassUpdate = props.dataClassUpdate;
+  const dataClasses = props.dataClasses;
 
   form.setFieldsValue({
-    classname: isEditingClass.classname,
-    time: isEditingClass.time,
-    salary: isEditingClass.salary,
-    genderOfStudent: isEditingClass.genderOfStudent,
-    nameParent: isEditingClass.nameParent,
-    numberOfSessions: isEditingClass.numberOfSessions,
-    district: isEditingClass.district,
-    street: isEditingClass.street,
-    phone: isEditingClass.phone,
-    genderOfParent: isEditingClass.genderOfParent,
+    classname: dataClassUpdate.classname,
+    time: dataClassUpdate.time,
+    salary: dataClassUpdate.salary,
+    genderOfStudent: dataClassUpdate.genderOfStudent,
+    nameParent: dataClassUpdate.nameParent,
+    numberOfSessions: dataClassUpdate.numberOfSessions,
+    district: dataClassUpdate.district,
+    street: dataClassUpdate.street,
+    phone: dataClassUpdate.phone,
+    genderOfParent: dataClassUpdate.genderOfParent,
   });
 
   const onFinish = (values) => {
     message.success("Update class in successfully");
     const updateClass = {
-      id: isEditingClass.id,
+      id: dataClassUpdate.id,
       classname: values.classname,
       district: values.district,
       street: values.street,
@@ -56,9 +52,8 @@ export default function UpdateClass(props) {
     updateItem2Local(updateClass);
   };
 
-  function updateItem2Local(updateClass) {
+  const updateItem2Local = (updateClass) => {
     let itemUpdate = dataClasses.find((item) => item.id === updateClass.id);
-    console.log(itemUpdate);
     itemUpdate.id = updateClass.id;
     itemUpdate.classname = updateClass.classname;
     itemUpdate.district = updateClass.district;
@@ -71,7 +66,7 @@ export default function UpdateClass(props) {
     itemUpdate.genderOfParent = updateClass.genderOfParent;
     itemUpdate.genderOfStudent = updateClass.genderOfStudent;
     localStorage.setItem("classes", JSON.stringify(dataClasses));
-  }
+  };
 
   return (
     <div className="form form-add-class">
@@ -85,8 +80,7 @@ export default function UpdateClass(props) {
         <div className="form-wrap flex">
           <div className="form-info-class col-6">
             <Form.Item
-              name="classname"
-              label="Class"
+              name="classname" label="Class"
               rules={[
                 {
                   required: true,
@@ -109,8 +103,7 @@ export default function UpdateClass(props) {
               </Select>
             </Form.Item>
             <Form.Item
-              name="time"
-              label="Time"
+              name="time" label="Time"
               rules={[
                 {
                   required: true,
@@ -124,28 +117,35 @@ export default function UpdateClass(props) {
               </Select>
             </Form.Item>
             <Form.Item
-              name="numberOfSessions"
-              label="Number of sessions"
+              name="numberOfSessions" label="Number of sessions"
               rules={[
                 {
                   type: "number",
+                  required: true,
                 },
               ]}
             >
               <InputNumber />
             </Form.Item>
             <Form.Item
-              name="salary"
-              label="Salary"
+              name="salary" label="Salary"
               rules={[
                 {
                   type: "number",
+                  required: true,
                 },
               ]}
             >
               <InputNumber />
             </Form.Item>
-            <Form.Item name="genderOfStudent" label="Gender of student">
+            <Form.Item
+              name="genderOfStudent" label="Gender of student"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
               <Radio.Group>
                 <Radio value={0}>Male</Radio>
                 <Radio value={1}>Female</Radio>
@@ -154,17 +154,24 @@ export default function UpdateClass(props) {
           </div>
           <div className="form-info-parent col-6">
             <Form.Item
-              name="nameParent"
-              label="Name of parent"
+              name="nameParent" label="Name of parent"
               rules={[
                 {
                   type: "text",
+                  required: true,
                 },
               ]}
             >
               <Input />
             </Form.Item>
-            <Form.Item name="district" label="District">
+            <Form.Item
+              name="district" label="District"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
               <Select placeholder="District">
                 <Option value="Hai Chau">Hai Chau</Option>
                 <Option value="Ngu Hanh Son">Ngu Hanh Son</Option>
@@ -174,28 +181,35 @@ export default function UpdateClass(props) {
               </Select>
             </Form.Item>
             <Form.Item
-              name="street"
-              label="Street"
+              name="street" label="Street"
               rules={[
                 {
                   type: "text",
+                  required: true,
                 },
               ]}
             >
               <Input placeholder="Street" />
             </Form.Item>
             <Form.Item
-              name="phone"
-              label="Phone"
+              name="phone" label="Phone"
               rules={[
                 {
                   type: "text",
+                  required: true,
                 },
               ]}
             >
               <Input />
             </Form.Item>
-            <Form.Item name="genderOfParent" label="Gender of parent">
+            <Form.Item
+              name="genderOfParent" label="Gender of parent"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
               <Radio.Group>
                 <Radio value={0}>Male</Radio>
                 <Radio value={1}>Female</Radio>

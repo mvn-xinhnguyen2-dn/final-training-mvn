@@ -604,9 +604,11 @@ label {
   padding: 20px;
   padding: 1.25rem;
   border: 1px solid;
-  width: 90%; }
+  width: 85%; }
   .form-add-class .ant-form-item-label {
     text-align: left; }
+  .form-add-class.tutor {
+    width: 65%; }
 
 .ant-checkbox-wrapper + .ant-checkbox-wrapper {
   margin-left: 0 !important; }
@@ -629,10 +631,48 @@ table {
   padding: 1.875rem; }
 
 .ant-table-thead tr {
-  background-color: #f7f7f7 !important; }
+  background-color: #e9eaec !important; }
 
-.ant-modal {
-  width: 75% !important; }
+.ant-table-tbody > tr > td {
+  padding: 0px 10px !important;
+  padding: 0rem 0.625rem !important; }
+
+.ant-table-tbody > tr:hover {
+  background-color: #e9eaec !important; }
+
+.ant-table-cell {
+  text-align: center !important; }
+  .ant-table-cell img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; }
+
+.tutor-detail {
+  align-items: center; }
+  .tutor-detail img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 10px; }
+
+.ant-modal-confirm-content {
+  margin-left: 0 !important; }
+
+.ant-modal-confirm-btns .ant-btn-primary {
+  margin-left: 0 !important; }
+
+.ant-form-item {
+  margin-bottom: 5px !important; }
+
+.tag {
+  font-size: 14px;
+  font-size: 0.875rem;
+  margin-right: 0px;
+  margin-right: 0rem;
+  margin-left: 5px;
+  margin-left: 0.3125rem;
+  text-align: center;
+  cursor: pointer; }
 
 .flex {
   display: flex; }
@@ -873,9 +913,9 @@ table {
   padding: 0.625rem;
   line-height: 28px;
   line-height: 1.75rem;
-  background: #e9eaec;
+  background: #151635;
   text-align: center;
-  background-color: black; }
+  color: #fff; }
 
 .sider-nav h4 {
   margin-top: 20px;
@@ -908,6 +948,11 @@ table {
 
 .is-hidden {
   display: none; }
+
+a {
+  color: #333; }
+  a:hover {
+    color: inherit; }
 
 .section-banner .banner-content {
   height: 500px;
@@ -957,32 +1002,71 @@ table {
     .panel-info-item:hover {
       background-color: #d61523; }
 
-.product-list {
-  flex-wrap: wrap; }
-  .product-list .product-item {
+.class-list {
+  flex-wrap: wrap;
+  justify-content: space-evenly; }
+  .class-list .class-item {
+    margin: 10px;
+    margin: 0.625rem;
+    padding: 10px;
+    padding: 0.625rem;
     width: 31%;
     align-items: center;
     box-shadow: 0 0.1px 12px 0 rgba(107, 182, 158, 0.668);
     border-radius: 5px;
     list-style-type: none;
     position: relative; }
-    .product-list .product-item:hover {
+    .class-list .class-item:hover {
       box-shadow: 0 0.1px 12px 0 rgba(47, 145, 195, 0.668); }
-    .product-list .product-item img {
+    .class-list .class-item img {
       width: 100px;
       width: 6.25rem;
       height: 100px;
       height: 6.25rem;
       object-fit: cover; }
+    .class-list .class-item .product-fav {
+      top: 10px;
+      top: 0.625rem;
+      right: 10px;
+      right: 0.625rem;
+      position: absolute; }
 
 .num-class {
-  width: 200px; }
+  width: 200px;
+  justify-content: center; }
   .num-class button {
-    padding: 5px 10px;
     margin-left: 5px; }
     .num-class button.active {
       background-color: #00676b;
       color: white; }
+    .num-class button:hover {
+      background-color: #151635; }
+
+.page-account .account {
+  width: auto;
+  position: relative; }
+  .page-account .account > img {
+    height: 300px;
+    height: 18.75rem;
+    object-fit: cover;
+    width: 100%;
+    filter: brightness(0.7); }
+  .page-account .account .account-info .account-avatar {
+    height: 250px;
+    height: 15.625rem;
+    width: 250px;
+    width: 15.625rem;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 5%; }
+  .page-account .account .account-info .account-text {
+    position: absolute;
+    left: 30%; }
+    .page-account .account .account-info .account-text p {
+      padding: 5px 0px;
+      padding: 0.3125rem 0rem; }
 
 .product-detail .product-brief {
   background-color: rgba(184, 181, 181, 0.132); }

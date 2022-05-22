@@ -1,3 +1,10 @@
+a {
+  color: map-get($colors, primary );
+  &:hover {
+    color: inherit
+  }
+}
+
 .section-banner {
   .banner-content {
     @include pxRem(height, 500);
@@ -53,9 +60,12 @@
     }
   }
 }
-.product-list {
+.class-list {
   flex-wrap: wrap;
-  .product-item {
+  justify-content: space-evenly;
+  .class-item {
+    @include pxRem(margin, 10);
+    @include pxRem(padding, 10);
     width: 31%;
     align-items: center;
     box-shadow: 0 0.1px 12px 0 rgba(107, 182, 158, 0.668);
@@ -70,16 +80,24 @@
       @include pxRem(height, 100);
       object-fit: cover;
     }
+    .product-fav {
+      @include pxRem(top, 10);
+      @include pxRem(right, 10);
+      position: absolute;
+    }
   }
 }
 .num-class {
   width: 200px;
+  justify-content: center;
   button {
-    padding: 5px 10px;
     margin-left: 5px;
     &.active {
       background-color: #00676b;
       color: white;
+    }
+    &:hover {
+      background-color: map-get($colors, bg-blue-dark );
     }
   }
 }

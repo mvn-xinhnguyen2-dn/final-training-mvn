@@ -1,18 +1,14 @@
-import { Table, Input, Button, Space, Modal } from "antd";
+import { Table, Input, Button, Space, Modal, notification, Tag } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { UpdateClass } from "../../Forms";
-import { FaEdit, FaTrashAlt, FaRegEye } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaRegEye, FaPlusCircle } from "react-icons/fa";
 
 export default function ClassTable() {
   const data = JSON.parse(localStorage.getItem("classes")) || [];
-  const items = data.map((item) =>(
-    {key : item.id,
-    ...item
-    }))
-  const [dataClasses, setDataClasses] = useState(items);
+  const items = data.map((item) => ({ key: item.id, ...item }));
+  const [dataClasses, setDataClasses] = useState(items.reverse());
 
   const handleDelete = (id) => {
     Modal.confirm({
@@ -21,41 +17,22 @@ export default function ClassTable() {
         const newData = dataClasses.filter((e) => {
           return e.id !== id;
         });
-        setDataClasses([...newData]);
-        localStorage.setItem("classes", JSON.stringify(dataClasses));
+        setDataClasses(newData);
+        localStorage.setItem("classes", JSON.stringify(newData));
       },
     });
   };
 
-  const handleEdit = (itemUpdate) => {
-    Modal.info({
-      title: `Edit class id : ${itemUpdate.id}`,
-      content: (
-        <>
-          <div>heleo</div>
-          <UpdateClass itemUpdate={itemUpdate} dataClasses={dataClasses} />
-        </>
-      ),
-      onOk: () => {
-        setDataClasses([...dataClasses]);
-      },
-      okText: "Close",
-    });
-  };
-  const handleSeeDetail = (id) => {
-    Modal.info({
-      title: `Information of class id : ${id}`,
-      content: (
-        <>
-          <div>heleo</div>
-          <div>heleo</div>
-          <div>heleo</div>
-        </>
-      ),
-      onOk: () => {
-        console.log("ok");
-      },
-      okText: "Close",
+  const [status, setStatus] = useState("");
+  const handleStatus = (x) => {
+    setStatus(!x.status);
+    let itemStatus = dataClasses.find((item) => item.id === x.id);
+    itemStatus.status = !x.status;
+    localStorage.setItem("classes", JSON.stringify(dataClasses));
+    setDataClasses([...dataClasses]);
+    notification.success({
+      message: `Successful`,
+      description: "Update status of class successfully!!!",
     });
   };
 
@@ -87,7 +64,7 @@ export default function ClassTable() {
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
-            style={{ width: 90 }}
+            style={{ width: 90, marginLeft: 0 }}
           >
             Search
           </Button>
@@ -132,10 +109,10 @@ export default function ClassTable() {
       ),
   });
 
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+  const handleSearch = (selectedKeys, confirm, dataIndex, key) => {
     confirm();
     setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
+    setSearchedColumn(dataIndex || key);
   };
 
   const handleReset = (clearFilters, confirm, dataIndex) => {
@@ -148,20 +125,23 @@ export default function ClassTable() {
   const columns = [
     {
       title: "STT",
-      dataIndex: "id",
       key: "id",
+      render: (a) => <p>{dataClasses.indexOf(a) + 1}</p>,
     },
     {
       title: "Class",
-      dataIndex: "classname",
       key: "classname",
       ...getColumnSearchProps("classname"),
+      render: (a) => <p>Class {a.classname}</p>,
+      sorter: (a, b) => a.classname - b.classname,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Salary",
-      dataIndex: "salary",
+      // dataIndex: "salary",
       key: "salary",
       ...getColumnSearchProps("Salary"),
+      render: (a) => <p>{a.salary}.000 VND</p>,
       sorter: (a, b) => a.salary - b.salary,
       sortDirections: ["descend", "ascend"],
     },
@@ -170,6 +150,8 @@ export default function ClassTable() {
       dataIndex: "time",
       key: "time",
       ...getColumnSearchProps("time"),
+      sorter: (a, b) => a.time - b.time,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Number of sessions / week",
@@ -184,26 +166,73 @@ export default function ClassTable() {
       dataIndex: "district",
       key: "district",
       ...getColumnSearchProps("district"),
+      sorter: (a, b) => a.district - b.district,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Status",
+      key: "status",
+      ...getColumnSearchProps("status"),
+      render: (a) => (
+        <Space>
+          {a.status === true ? (
+            <Tag
+              color="green"
+              className={`tag status ${status}`}
+              onClick={() => handleStatus(a)}
+            >
+              Available
+            </Tag>
+          ) : (
+            <Tag
+              color="volcano"
+              className={`tag status ${status}`}
+              onClick={() => handleStatus(a)}
+            >
+              Disvailable
+            </Tag>
+          )}
+        </Space>
+      ),
+      sorter: (a, b) => a.status - b.status,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
     },
     {
       title: "Action",
       key: "action",
       render: (a) => (
         <Space size="middle">
-          <Link className="btn none" to={`/admin/manage-classes/detail-${a.id}`}><FaRegEye /></Link>
-          <Link className="btn none" to={`/admin/manage-classes/edit-${a.id}`}><FaEdit /></Link>
-          <button className="btn none" onClick={() => handleDelete(a.id)}><FaTrashAlt /></button>
+          <Link
+            className="btn none"
+            to={`/admin/manage-classes/detail-${a.id}`}
+          >
+            <FaRegEye />
+          </Link>
+          <Link className="btn none" to={`/admin/manage-classes/edit-${a.id}`}>
+            <FaEdit />
+          </Link>
+          <button className="btn none" onClick={() => handleDelete(a.id)}>
+            <FaTrashAlt />
+          </button>
         </Space>
       ),
     },
   ];
   return (
     <>
-      <Link className="btn" to="/admin/manage-classes/add-class">
-        Add new
-      </Link>
-      <Table columns={columns} dataSource={dataClasses.reverse()} />
+      <div className="title-table flex">
+        <h3>CLASS LIST</h3>
+        <Tag color="blue" className="tag">
+          <FaPlusCircle className="mt-5 mr-5" />
+          <Link to="/admin/manage-classes/add-class">Add new</Link>
+        </Tag>
+      </div>
+      <Table columns={columns} dataSource={dataClasses} />
     </>
   );
 }
-

@@ -1,0 +1,31 @@
+.page-account {
+  // Specific style for Contact Us page
+  .account {
+    width: auto;
+    position: relative;
+    >img {
+      @include pxRem(height, 300);
+      object-fit: cover;
+      width: 100%;
+      filter: brightness(0.7);
+    }
+    .account-info {
+      .account-avatar {
+        @include pxRem(height, 250);
+        @include pxRem(width, 250);
+        object-fit: cover;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 5%;
+      }
+      .account-text {
+        position: absolute;
+        left: 30%;
+        p {
+          @include pxRem(padding, 5 0);
+        }
+      }
+    }
+  }
+}

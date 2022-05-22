@@ -1,23 +1,17 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useState } from "react";
+import { Switch, Route, NavLink, Link } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import ManageAccounts from "./ManageAccounts";
 import ManageClasses from "./ManageClasses";
 import ManageTutors from "./ManageTutors";
-import Account from "./Account";
-import AddClassPage from "./ManageClasses/AddClassPage";
-import AddTutorPage from "./ManageTutors/AddTutorPage";
-
-import { useState } from "react";
-import { Layout } from "antd";
 import {
   FaRegChartBar,
   FaUserCog,
   FaUsers,
   FaRegNewspaper,
 } from "react-icons/fa";
-import { NavLink, Link } from "react-router-dom";
 
+import { Layout } from "antd";
 const { Sider } = Layout;
 
 export default function Admin() {
@@ -53,7 +47,7 @@ export default function Admin() {
                 </NavLink>
               </li>
               <li className="sider-nav-item">
-                <NavLink activeClassName="active" to="/admin/manage-accounts">
+                <NavLink activeClassName="active" to="/admin/accounts">
                   <span>
                     <FaUserCog />
                   </span>
@@ -66,14 +60,6 @@ export default function Admin() {
                     <FaRegNewspaper />
                   </span>
                   <span className="sider-nav-item-name">Manage Classes</span>
-                </NavLink>
-              </li>
-              <li className="sider-nav-item">
-                <NavLink activeClassName="active" to="/admin/add-class">
-                  <span>
-                    <FaRegNewspaper />
-                  </span>
-                  <span className="sider-nav-item-name">Add Class</span>
                 </NavLink>
               </li>
               <li className="sider-nav-item">
@@ -92,26 +78,17 @@ export default function Admin() {
           <Route path="/admin/dashboard">
             <Dashboard />
           </Route>
-          <Route path="/admin/manage-accounts">
+          <Route path="/admin/accounts">
             <ManageAccounts />
           </Route>
           <Route path="/admin/manage-classes">
-            <ManageClasses dataClasses={dataClasses}/>
+            <ManageClasses dataClasses={dataClasses} />
           </Route>
-          <Route path="/admin/add-class">
-            <AddClassPage dataClasses={dataClasses} />
-          </Route>
-          {/* <Route path="/admin/manage-parent">
-            <ManageParents dataClasses={dataClasses}/>
-          </Route> */}
           <Route path="/admin/manage-tutors">
             <ManageTutors dataTutors={dataTutors} />
           </Route>
-          <Route path="/admin/add-tutor">
-            <AddTutorPage dataTutors={dataTutors} />
-          </Route>
           <Route path="/admin/account">
-            <Account />
+            <ManageAccounts />
           </Route>
         </Switch>
       </Layout>

@@ -1,7 +1,15 @@
-import React from "react";
-import { Form, Input, InputNumber, Button, Select, Radio, message } from "antd";
-import { Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import {
+  Upload,
+  Form,
+  Input,
+  InputNumber,
+  Button,
+  Select,
+  Radio,
+  message,
+} from "antd";
+
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -16,22 +24,50 @@ const layout = {
 
 const validateMessages = {
   required: "${label} is required!",
-  types: {
-    number: "${label} is not a valid number!",
-  },
 };
 /* eslint-enable no-template-curly-in-string */
 const normFile = (e) => {
+  console.log("Upload event:", e);
   if (Array.isArray(e)) {
     return e;
   }
   return e && e.fileList;
 };
 
-export default function UpdateTutor(props) {
-  const dataTutors = props.dataTutors;
-  const isEditingTutor = props.itemUpdate;
+export default function UpdateTutorForm(props) {
   const [form] = Form.useForm();
+  const dataTutors = props.dataTutors;
+  const isEditingTutor = props.tutorItem;
+  const [avatarLink, setAvatarLink] = useState("");
+  const [fileList, setFileList] = useState([
+    {
+      uid: "-1",
+      name: "image.png",
+      status: "done",
+      url: `${isEditingTutor.avatar}`,
+    },
+  ]);
+
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+    fileList.push(newFileList);
+    setAvatarLink(fileList[1].thumbUrl);
+  };
+
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow.document.write(image.outerHTML);
+  };
 
   form.setFieldsValue({
     fullName: isEditingTutor.fullName,
@@ -40,11 +76,10 @@ export default function UpdateTutor(props) {
     phone: isEditingTutor.phone,
     experience: isEditingTutor.experience,
     area: isEditingTutor.area,
-    // avatar: isEditingTutor.avatar[0].thumbUrl,
+    avatar: isEditingTutor.avatar,
   });
 
   const onFinish = (values) => {
-    message.success("Update class in successfully");
     const updateTutor = {
       id: isEditingTutor.id,
       fullName: values.fullName,
@@ -53,37 +88,37 @@ export default function UpdateTutor(props) {
       phone: values.phone,
       experience: values.experience,
       area: values.area,
-      avatar: values.avatar[0].thumbUrl,
+      avatar: avatarLink || isEditingTutor.avatar,
     };
+    // form.resetFields();
+    message.success("Update class in successfully");
     updateItem2Local(updateTutor);
   };
 
-  function updateItem2Local(updateTutor) {
+  const updateItem2Local = (updateTutor) => {
     let itemUpdate = dataTutors.find((item) => item.id === updateTutor.id);
-    console.log(itemUpdate);
     itemUpdate.id = updateTutor.id;
     itemUpdate.fullName = updateTutor.fullName;
-      itemUpdate.yearOfBirth = updateTutor.yearOfBirth;
-      itemUpdate.gender = updateTutor.gender;
-      itemUpdate.phone = updateTutor.phone;
-      itemUpdate.experience = updateTutor.experience;
-      itemUpdate.area = updateTutor.area;
-      itemUpdate.avatar = updateTutor.avatar[0].thumbUrl;
+    itemUpdate.yearOfBirth = updateTutor.yearOfBirth;
+    itemUpdate.gender = updateTutor.gender;
+    itemUpdate.phone = updateTutor.phone;
+    itemUpdate.experience = updateTutor.experience;
+    itemUpdate.area = updateTutor.area;
+    itemUpdate.avatar = updateTutor.avatar;
     localStorage.setItem("tutors", JSON.stringify(dataTutors));
   }
 
   return (
     <div className="form form-add-class">
       <Form
-        form ={form}
+        form={form}
         {...layout}
         name="nest-messages"
         onFinish={onFinish}
         validateMessages={validateMessages}
       >
         <Form.Item
-          name="fullName"
-          label="Full name"
+          name="fullName" label="Full name"
           rules={[
             {
               required: true,
@@ -93,8 +128,7 @@ export default function UpdateTutor(props) {
           <Input />
         </Form.Item>
         <Form.Item
-          name="gender"
-          label="Gender"
+          name="gender" label="Gender"
           rules={[
             {
               required: true,
@@ -107,19 +141,22 @@ export default function UpdateTutor(props) {
           </Radio.Group>
         </Form.Item>
         <Form.Item
-          name="yearOfBirth"
-          label="Year"
+          name="yearOfBirth" label="Year"
           rules={[
             {
-              type: "number",
+              required: true,
             },
           ]}
         >
           <InputNumber />
         </Form.Item>
         <Form.Item
-          name="experience"
-          label="Experience"
+          name="experience" label="Experience"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
         >
           <Select placeholder="Experience">
             <Option value="More than 1 years">More than 1 years</Option>
@@ -128,7 +165,14 @@ export default function UpdateTutor(props) {
             <Option value="No experience">No experience</Option>
           </Select>
         </Form.Item>
-        <Form.Item name="area" label="Address">
+        <Form.Item
+          name="area" label="Address"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
           <Select placeholder="District">
             <Option value="Hai Chau">Hai Chau</Option>
             <Option value="Ngu Hanh Son">Ngu Hanh Son</Option>
@@ -138,29 +182,36 @@ export default function UpdateTutor(props) {
           </Select>
         </Form.Item>
         <Form.Item
-          name="phone"
-          label="Phone"
+          name="phone" label="Phone"
           rules={[
             {
+              required: true,
               type: "text",
             },
           ]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name="avatar" label="Avatar" 
-          valuePropName="fileList" 
+        <Form.Item
+          label="Avatar"
+          valuePropName="fileList"
           getValueFromEvent={normFile}
-          extra="longgggggggggggggggggggggggggggggggggg"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
         >
           <Upload
-              // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              
-              listType="picture"
-              
-            >
-              <Button icon={<UploadOutlined />}>Upload</Button>
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            listType="picture-card"
+            fileList={fileList}
+            onChange={onChange}
+            onPreview={onPreview}
+          >
+            {fileList.length < 2 && "+ Upload"}
           </Upload>
+          <p></p>
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 5 }}>
           <Button type="primary" htmlType="submit">
