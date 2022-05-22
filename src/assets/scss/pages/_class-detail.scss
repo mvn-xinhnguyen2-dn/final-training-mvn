@@ -1,0 +1,15 @@
+.class-detail {
+  width: 60%;
+  justify-content: space-between;
+  .info {
+    box-shadow: 0 0.1px 12px 0 rgba(149, 208, 189, 0.6);
+    border-radius: 5px;
+    p {
+      padding: 10px;
+      margin-left: 20px;
+    }
+    h4 {
+      text-align: center;
+    }
+  }
+}

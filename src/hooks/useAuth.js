@@ -13,7 +13,7 @@ const useAuth = () => {
         localStorage.setItem('user', JSON.stringify({ email }));
         setUser({ email });
         setIsLogger(true);
-        history.push('/admin/dashboard');
+        history.push('/admin/accounts');
         res({ email });
       }, 1000);
     });

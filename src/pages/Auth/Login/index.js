@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useField from "../../../hooks/useField";
-import { DataTutor, DataClass, DataAccount } from "../../../data";
+import { DataTutor, DataAccount } from "../../../data";
 import loginImg from "../../../assets/images/login-img.png";
 import { message } from 'antd';
 
@@ -40,7 +40,6 @@ export default function Login() {
   return (
     <div className="page-main-login">
       <div className="container flex py-30">
-        <DataClass />
         <DataTutor />
         <DataAccount />
         <div className="login-image col-7">

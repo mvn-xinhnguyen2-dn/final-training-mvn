@@ -2,4 +2,7 @@
   @include pxRem(margin-top, 30);
   justify-content: space-around;
   align-items: center;
+  h3 {
+    color: map-get($colors, txt-hover);
+  }
 }

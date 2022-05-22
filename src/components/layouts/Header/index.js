@@ -57,8 +57,8 @@ export default function Header() {
                 </Link>
               </li>
               <li className={`social-item p-15 ${isLogger}`}>
-                <Link to="/admin/accounts">
-                  {isLogger ? <span>{findName.name}!</span> : <span></span>}
+                <Link to="/admin">
+                  {isLogger ? <span>{findName.name}</span> : <span></span>}
                 </Link>
               </li>
               <li className="social-item p-15">

@@ -1,7 +1,8 @@
 import React from "react";
 import { AddClassForm } from "../../../../../components/modules/Forms";
 import { Link } from "react-router-dom";
-import { Layout, Breadcrumb } from "antd";
+import { Layout, Breadcrumb, Tag } from "antd";
+import {FaUndo} from "react-icons/fa";
 const { Content } = Layout;
 
 export default function AddClassPage(props) {
@@ -17,9 +18,10 @@ export default function AddClassPage(props) {
           <div className="site-layout-background">
             <div className="title-table flex">
               <h3>ADD NEW CLASS</h3>
-              <Link to="/admin/manage-classes" className="btn">
-                Back
-              </Link>
+              <Tag color="blue" className="tag">
+                <FaUndo className="mt-5 mr-5" />
+                <Link to="/admin/manage-classes">Back</Link>
+              </Tag>
             </div>
             <AddClassForm dataClasses={dataClasses} />
           </div>

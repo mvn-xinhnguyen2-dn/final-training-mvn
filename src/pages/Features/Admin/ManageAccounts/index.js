@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Layout, Tag } from "antd";
 import useAuth from '../../../../hooks/useAuth';
 
@@ -28,7 +29,7 @@ export default function ManageAccounts() {
               <p>Username: {user.email}</p>
               <p>Gender: {findName.gender ===0 ? "Male" : "Female"}</p>
               <Tag className="tag ml-0" color="green">Update info</Tag>
-              <Tag className="tag" color="geekblue">Change password</Tag>
+              <Tag className="tag" color="geekblue"><Link to="/auth/forgot-pasword">Change password</Link></Tag>
               <Tag className="tag" color="orange" onClick={() => logout()}>Logout</Tag>
             </div>
 

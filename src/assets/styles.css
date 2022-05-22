@@ -905,8 +905,7 @@ table {
 .page-main {
   padding: 0px 0px;
   padding: 0rem 0rem;
-  min-height: 80vh;
-  background-color: #f7f7f7; }
+  min-height: 80vh; }
 
 .page-footer {
   padding: 10px;
@@ -1068,23 +1067,17 @@ a {
       padding: 5px 0px;
       padding: 0.3125rem 0rem; }
 
-.product-detail .product-brief {
-  background-color: rgba(184, 181, 181, 0.132); }
-
-.product-detail .image {
-  width: 500px;
-  width: 31.25rem;
-  height: 500px;
-  height: 31.25rem;
-  object-fit: cover; }
-
-.product-detail .breadcrumbs {
-  background-color: antiquewhite;
-  padding: 15px;
-  padding: 0.9375rem; }
-  .product-detail .breadcrumbs a {
-    padding: 20px;
-    padding: 1.25rem; }
+.class-detail {
+  width: 60%;
+  justify-content: space-between; }
+  .class-detail .info {
+    box-shadow: 0 0.1px 12px 0 rgba(149, 208, 189, 0.6);
+    border-radius: 5px; }
+    .class-detail .info p {
+      padding: 10px;
+      margin-left: 20px; }
+    .class-detail .info h4 {
+      text-align: center; }
 
 .page-main-login {
   min-height: inherit; }
@@ -1098,3 +1091,5 @@ a {
   margin-top: 1.875rem;
   justify-content: space-around;
   align-items: center; }
+  .title-table h3 {
+    color: #d61523; }

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Switch, Route, NavLink, Link } from "react-router-dom";
-import Dashboard from "./Dashboard";
+// import Dashboard from "./Dashboard";
 import ManageAccounts from "./ManageAccounts";
 import ManageClasses from "./ManageClasses";
 import ManageTutors from "./ManageTutors";
 import {
-  FaRegChartBar,
+  // FaRegChartBar,
   FaUserCog,
   FaUsers,
   FaRegNewspaper,
@@ -35,19 +35,19 @@ export default function Admin() {
         >
           <aside className="sider-nav">
             <h4>
-              <Link to="/admin/account">Admin!</Link>
+              <Link to="/admin">Admin</Link>
             </h4>
             <ul className="sider-nav-list">
-              <li className="sider-nav-item">
+              {/* <li className="sider-nav-item">
                 <NavLink activeClassName="active" to="/admin/dashboard" exact>
                   <span>
                     <FaRegChartBar />
                   </span>
                   <span className="sider-nav-item-name">Dashboard</span>
                 </NavLink>
-              </li>
+              </li> */}
               <li className="sider-nav-item">
-                <NavLink activeClassName="active" to="/admin/accounts">
+                <NavLink activeClassName="active" to="/admin" exact>
                   <span>
                     <FaUserCog />
                   </span>
@@ -75,12 +75,9 @@ export default function Admin() {
         </Sider>
 
         <Switch>
-          <Route path="/admin/dashboard">
+          {/* <Route path="/admin/dashboard">
             <Dashboard />
-          </Route>
-          <Route path="/admin/accounts">
-            <ManageAccounts />
-          </Route>
+          </Route> */}
           <Route path="/admin/manage-classes">
             <ManageClasses dataClasses={dataClasses} />
           </Route>
@@ -88,6 +85,9 @@ export default function Admin() {
             <ManageTutors dataTutors={dataTutors} />
           </Route>
           <Route path="/admin/account">
+            <ManageAccounts />
+          </Route>
+          <Route path="/admin">
             <ManageAccounts />
           </Route>
         </Switch>

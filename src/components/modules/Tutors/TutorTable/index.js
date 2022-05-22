@@ -167,7 +167,6 @@ export default function TutorTable() {
     },
     {
       title: "Gender",
-      // dataIndex: "gender",
       key: "gender",
       render: (a) => (a.gender === 0? <p>Male</p> : <p>Female</p>)
     },
