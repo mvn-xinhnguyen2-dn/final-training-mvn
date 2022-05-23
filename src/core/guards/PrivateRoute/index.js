@@ -9,16 +9,16 @@ export default function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-          isLogger ? (
-            children
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/auth/login",
-                state: { from: location },
-              }}
-            />
-          )
+        isLogger ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/auth/login",
+              state: { from: location },
+            }}
+          />
+        )
       }
     />
   );

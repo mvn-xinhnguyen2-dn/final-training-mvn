@@ -1,12 +1,37 @@
 import React from "react";
-import { AddClassForm } from "../../../../../components/modules/Forms";
+import { ClassForm } from "../../../../../components/modules/Forms";
 import { Link } from "react-router-dom";
-import { Layout, Breadcrumb, Tag } from "antd";
-import {FaUndo} from "react-icons/fa";
+import { Layout, Breadcrumb, Tag, Form, message } from "antd";
+import { FaUndo } from "react-icons/fa";
 const { Content } = Layout;
 
 export default function AddClassPage(props) {
   const dataClasses = props.dataClasses;
+  const [form] = Form.useForm();
+
+  const onAddClass = (values) => {
+    const id = `c${Math.floor(Math.random() * 101)}`;
+    const newClass = {
+      key: id,
+      id,
+      classname: values.classname,
+      district: values.district,
+      street: values.street,
+      salary: values.salary,
+      time: values.time,
+      numberOfSessions: values.numberOfSessions,
+      phone: values.phone,
+      nameParent: values.nameParent,
+      genderOfParent: values.genderOfParent,
+      genderOfStudent: values.genderOfStudent,
+      status: true,
+    };
+    // setDataClasses([newClass, ...dataClasses])
+    dataClasses.unshift(newClass);
+    localStorage.setItem("classes", JSON.stringify(dataClasses));
+    form.resetFields();
+    message.success("Add class in successfully");
+  };
   return (
     <>
       <Layout className="site-layout">
@@ -23,7 +48,7 @@ export default function AddClassPage(props) {
                 <Link to="/admin/manage-classes">Back</Link>
               </Tag>
             </div>
-            <AddClassForm dataClasses={dataClasses} />
+            <ClassForm dataClasses={dataClasses} onFinish={onAddClass} />
           </div>
         </Content>
       </Layout>

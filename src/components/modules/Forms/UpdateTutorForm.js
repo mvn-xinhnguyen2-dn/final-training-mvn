@@ -106,7 +106,7 @@ export default function UpdateTutorForm(props) {
     itemUpdate.area = updateTutor.area;
     itemUpdate.avatar = updateTutor.avatar;
     localStorage.setItem("tutors", JSON.stringify(dataTutors));
-  }
+  };
 
   return (
     <div className="form form-add-class">
@@ -118,7 +118,8 @@ export default function UpdateTutorForm(props) {
         validateMessages={validateMessages}
       >
         <Form.Item
-          name="fullName" label="Full name"
+          name="fullName"
+          label="Full name"
           rules={[
             {
               required: true,
@@ -128,7 +129,8 @@ export default function UpdateTutorForm(props) {
           <Input />
         </Form.Item>
         <Form.Item
-          name="gender" label="Gender"
+          name="gender"
+          label="Gender"
           rules={[
             {
               required: true,
@@ -141,7 +143,8 @@ export default function UpdateTutorForm(props) {
           </Radio.Group>
         </Form.Item>
         <Form.Item
-          name="yearOfBirth" label="Year"
+          name="yearOfBirth"
+          label="Year"
           rules={[
             {
               required: true,
@@ -151,7 +154,8 @@ export default function UpdateTutorForm(props) {
           <InputNumber />
         </Form.Item>
         <Form.Item
-          name="experience" label="Experience"
+          name="experience"
+          label="Experience"
           rules={[
             {
               required: true,
@@ -166,7 +170,8 @@ export default function UpdateTutorForm(props) {
           </Select>
         </Form.Item>
         <Form.Item
-          name="area" label="Address"
+          name="area"
+          label="Address"
           rules={[
             {
               required: true,
@@ -182,7 +187,8 @@ export default function UpdateTutorForm(props) {
           </Select>
         </Form.Item>
         <Form.Item
-          name="phone" label="Phone"
+          name="phone"
+          label="Phone"
           rules={[
             {
               required: true,

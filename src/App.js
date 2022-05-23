@@ -16,7 +16,13 @@ function App() {
       <DataClass />
       <Header />
       <main className="page-main">
-        <Suspense fallback={<div className="center mt-30"><Spin /></div>}>
+        <Suspense
+          fallback={
+            <div className="center mt-30">
+              <Spin />
+            </div>
+          }
+        >
           <Switch>
             <PrivateRoute path="/admin">
               <Admin />

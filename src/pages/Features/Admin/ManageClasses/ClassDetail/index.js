@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { Layout, Breadcrumb, Tag } from "antd";
-import {FaUndo} from "react-icons/fa";
+import { FaUndo } from "react-icons/fa";
 
 const { Content } = Layout;
 
@@ -32,15 +32,30 @@ export default function ClassDetail(props) {
                 <p>Salary: {classItem.salary}</p>
                 <p>Time: {classItem.time}</p>
                 <p>Number of sessions: {classItem.numberOfSessions}</p>
-                <p>Gender of student: {classItem.genderOfStudent===0 ? "Male" : "Female"}</p>
-                <p>Status: {classItem.status ? <Tag color="green">Available</Tag> : <Tag color="volcano">Disvailable</Tag> }</p>
+                <p>
+                  Gender of student:{" "}
+                  {classItem.genderOfStudent === 0 ? "Male" : "Female"}
+                </p>
+                <p>
+                  Status:{" "}
+                  {classItem.status ? (
+                    <Tag color="green">Available</Tag>
+                  ) : (
+                    <Tag color="volcano">Disvailable</Tag>
+                  )}
+                </p>
               </div>
               <div className="class-detail info col-6">
                 <h4>Parent info</h4>
                 <p>Name of parent: {classItem.nameParent}</p>
                 <p>Phone: {classItem.phone}</p>
-                <p>Address: {classItem.street}, {classItem.district}</p>
-                <p>Gender of parent: {classItem.genderOfParent===0 ? "Male" : "Female"}</p>
+                <p>
+                  Address: {classItem.street}, {classItem.district}
+                </p>
+                <p>
+                  Gender of parent:{" "}
+                  {classItem.genderOfParent === 0 ? "Male" : "Female"}
+                </p>
               </div>
             </div>
           </div>

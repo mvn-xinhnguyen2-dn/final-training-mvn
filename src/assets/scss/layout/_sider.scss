@@ -1,12 +1,13 @@
 .sider-nav {
   h4 {
-    @include pxRem(margin-top, 20);
     color: map-get($colors, white);
+    @include pxRem(margin-top, 20);
     text-align: center;
   }
   &-item {
     @include pxRem(padding, 10);
     @include pxRem(margin-left, 20);
+    @include pxRem(font-size, 16);
     
     a {
       display: flex;

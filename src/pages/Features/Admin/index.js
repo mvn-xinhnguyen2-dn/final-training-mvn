@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Switch, Route, NavLink, Link } from "react-router-dom";
-// import Dashboard from "./Dashboard";
+import { Switch, Route, NavLink } from "react-router-dom";
 import ManageAccounts from "./ManageAccounts";
 import ManageClasses from "./ManageClasses";
 import ManageTutors from "./ManageTutors";
 import {
-  // FaRegChartBar,
   FaUserCog,
   FaUsers,
   FaRegNewspaper,
@@ -34,18 +32,8 @@ export default function Admin() {
           onCollapse={() => setCollapsed(!collapsed)}
         >
           <aside className="sider-nav">
-            <h4>
-              <Link to="/admin">Admin</Link>
-            </h4>
+            <h4>ADMIN</h4>
             <ul className="sider-nav-list">
-              {/* <li className="sider-nav-item">
-                <NavLink activeClassName="active" to="/admin/dashboard" exact>
-                  <span>
-                    <FaRegChartBar />
-                  </span>
-                  <span className="sider-nav-item-name">Dashboard</span>
-                </NavLink>
-              </li> */}
               <li className="sider-nav-item">
                 <NavLink activeClassName="active" to="/admin" exact>
                   <span>
@@ -75,9 +63,6 @@ export default function Admin() {
         </Sider>
 
         <Switch>
-          {/* <Route path="/admin/dashboard">
-            <Dashboard />
-          </Route> */}
           <Route path="/admin/manage-classes">
             <ManageClasses dataClasses={dataClasses} />
           </Route>

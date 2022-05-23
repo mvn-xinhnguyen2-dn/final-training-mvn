@@ -917,16 +917,18 @@ table {
   color: #fff; }
 
 .sider-nav h4 {
+  color: #fff;
   margin-top: 20px;
   margin-top: 1.25rem;
-  color: #fff;
   text-align: center; }
 
 .sider-nav-item {
   padding: 10px;
   padding: 0.625rem;
   margin-left: 20px;
-  margin-left: 1.25rem; }
+  margin-left: 1.25rem;
+  font-size: 16px;
+  font-size: 1rem; }
   .sider-nav-item a {
     display: flex;
     gap: 20px;

@@ -5,8 +5,7 @@ import AddClassPage from "./AddClassPage";
 import UpdateClassPage from "./UpdateClassPage";
 import ClassesList from "./ClassList/ClassList";
 
-export default function ManageClasses(props) {
-  const dataClasses = props.dataClasses;
+export default function ManageClasses({ dataClasses }) {
   return (
     <>
       <Switch>

@@ -25,7 +25,14 @@ export default function ClassItem(props) {
           <p>Salary: {props.item.salary}.000 VND</p>
           <p>Time: {props.item.time}</p>
           <p>Number of sessions / week: {props.item.numberOfSessions}</p>
-          <p>Status: {props.item.status? <Tag color="green">Available</Tag> : <Tag color="volcano">Disvailable</Tag>}</p>
+          <p>
+            Status:{" "}
+            {props.item.status ? (
+              <Tag color="green">Available</Tag>
+            ) : (
+              <Tag color="volcano">Disvailable</Tag>
+            )}
+          </p>
         </Link>
         <span
           className="product-fav"

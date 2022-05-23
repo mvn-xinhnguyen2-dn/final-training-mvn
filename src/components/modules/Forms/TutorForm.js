@@ -1,6 +1,6 @@
-import { Form, Input, InputNumber, Button, Select, Radio, message } from "antd";
-import { Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Form, Input, InputNumber, Button, Select, Radio } from "antd";
+import { Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 const layout = {
@@ -21,8 +21,7 @@ const validateMessages = {
 };
 /* eslint-enable no-template-curly-in-string */
 const normFile = (e) => {
-  console.log('Upload event:', (e));
-  // console.log('Upload event:', (e.file.thumbUrl));
+  console.log("Upload event:", e);
 
   if (Array.isArray(e)) {
     return e;
@@ -31,35 +30,11 @@ const normFile = (e) => {
   return e && e.fileList;
 };
 
-export default function AddTutorForm(props) {
-  const [form] = Form.useForm();
-  const dataTutors = props.dataTutors;
-
-  const onFinish = (values) => {
-    console.log(values)
-    const id = `t${Math.floor(Math.random() * 101)}`;
-    const avatarLink = values.avatar[0].thumbUrl
-    const newTutor = {
-      key: id,
-      id,
-      fullName: values.fullName,
-      yearOfBirth: values.yearOfBirth,
-      gender: values.gender,
-      phone: values.phone,
-      experience: values.experience,
-      area: values.area,
-      avatar: avatarLink,
-    };
-    dataTutors.unshift(newTutor);
-    localStorage.setItem("tutors", JSON.stringify(dataTutors));
-    form.resetFields()
-    message.success("Add class in successfully");
-  };
-  
+export default function TutorForm({ onFinish, form }) {
   return (
     <div className="form form-add-class tutor">
       <Form
-        form ={form}
+        form={form}
         {...layout}
         name="nest-messages"
         onFinish={onFinish}
@@ -96,6 +71,7 @@ export default function AddTutorForm(props) {
           rules={[
             {
               type: "number",
+              required: true,
             },
           ]}
         >
@@ -104,6 +80,11 @@ export default function AddTutorForm(props) {
         <Form.Item
           name="experience"
           label="Experience"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
         >
           <Select placeholder="Experience">
             <Option value="More than 1 years">More than 1 years</Option>
@@ -112,7 +93,15 @@ export default function AddTutorForm(props) {
             <Option value="No experience">No experience</Option>
           </Select>
         </Form.Item>
-        <Form.Item name="area" label="Address">
+        <Form.Item
+          name="area"
+          label="Area"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
           <Select placeholder="District">
             <Option value="Hai Chau">Hai Chau</Option>
             <Option value="Ngu Hanh Son">Ngu Hanh Son</Option>
@@ -127,20 +116,28 @@ export default function AddTutorForm(props) {
           rules={[
             {
               type: "text",
+              required: true,
             },
           ]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name="avatar" label="Avatar" 
-          valuePropName="fileList" 
+        <Form.Item
+          name="avatar"
+          label="Avatar"
+          valuePropName="fileList"
           getValueFromEvent={normFile}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
         >
           <Upload
-              // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              listType="picture"
-            >
-              <Button icon={<UploadOutlined />}>Upload</Button>
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            listType="picture"
+          >
+            <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload>
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 5 }}>

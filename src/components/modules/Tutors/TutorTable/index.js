@@ -1,19 +1,14 @@
-import { Table, Input, Button, Space, Modal , Tag } from "antd";
+import { Table, Input, Button, Space, Modal, Tag } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
 import { FaEdit, FaTrashAlt, FaRegEye, FaPlusCircle } from "react-icons/fa";
-
+import { UpdateTutorForm } from "../../Forms";
 import { Link } from "react-router-dom";
-
-import UpdateTutorForm from "../../Forms/UpdateTutorForm";
 
 export default function TutorTable() {
   const data = JSON.parse(localStorage.getItem("tutors")) || [];
-  const items = data.map((item) =>(
-    {key : item.id,
-    ...item
-    }))
+  const items = data.map((item) => ({ key: item.id, ...item }));
   const [dataTutors, setDataTutors] = useState(items);
 
   const handleDelete = (id) => {
@@ -23,7 +18,7 @@ export default function TutorTable() {
         const newData = dataTutors.filter((e) => {
           return e.id !== id;
         });
-        setDataTutors(newData)
+        setDataTutors(newData);
         localStorage.setItem("tutors", JSON.stringify(newData));
       },
     });
@@ -35,16 +30,14 @@ export default function TutorTable() {
       title: `Edit Tutor id : ${itemUpdate.id}`,
       content: (
         <>
-          <UpdateTutorForm tutorItem={itemUpdate} dataTutors = {dataTutors} />
+          <UpdateTutorForm tutorItem={itemUpdate} dataTutors={dataTutors} />
         </>
       ),
       onOk: () => {
-        setDataTutors([...dataTutors])
+        setDataTutors([...dataTutors]);
       },
-      okText: "Close"
+      okText: "Close",
     });
-
-
   };
   const handleSeeDetail = (item) => {
     Modal.success({
@@ -56,7 +49,7 @@ export default function TutorTable() {
           </div>
           <div>
             <div>Name: {item.fullName}</div>
-            <div>Gender: {item.gender===0? "Male" : "Female"}</div>
+            <div>Gender: {item.gender === 0 ? "Male" : "Female"}</div>
             <div>Experience: {item.experience}</div>
             <div>Year: {item.yearOfBirth}</div>
             <div>Phone: {item.phone}</div>
@@ -65,9 +58,9 @@ export default function TutorTable() {
         </div>
       ),
       onOk: () => {
-        console.log("ok")
+        console.log("ok");
       },
-      okText: "Close"
+      okText: "Close",
     });
   };
 
@@ -75,57 +68,74 @@ export default function TutorTable() {
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
 
-  const getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            ref={searchInput}
-            placeholder={`Search ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            style={{ marginBottom: 8, display: 'block' }}
-          />
-          <Space>
-            <Button
-              type="primary"
-              onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              icon={<SearchOutlined />}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Search
-            </Button>
-            <Button onClick={() => handleReset(clearFilters, confirm, dataIndex)} size="small" style={{ width: 90 }}>
-              Reset
-            </Button>
-          </Space>
-        </div>
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={searchInput}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ marginBottom: 8, display: "block" }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => handleReset(clearFilters, confirm, dataIndex)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
+    onFilterDropdownVisibleChange: (visible) => {
+      if (visible) {
+        setTimeout(
+          () =>
+            searchInput && searchInput.current && searchInput.current.select()
+        );
+      }
+    },
+    render: (text) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ) : (
+        text
       ),
-      filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-      onFilter: (value, record) =>
-        record[dataIndex]
-          ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-          : '',
-      onFilterDropdownVisibleChange: visible => {
-        if (visible) {
-          setTimeout(
-              () => searchInput && searchInput.current && searchInput.current.select()
-            )
-        }
-      },
-      render: text =>
-        searchedColumn === dataIndex ? (
-          <Highlighter
-            highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-            searchWords={[searchText]}
-            autoEscape
-            textToHighlight={text ? text.toString() : ''}
-          />
-        ) : (
-          text
-        ),
-})
+  });
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -144,14 +154,13 @@ export default function TutorTable() {
     {
       title: "STT",
       key: "id",
-      render: (a) => (<p>{dataTutors.indexOf(a)+1}</p>)
+      render: (a) => <p>{dataTutors.indexOf(a) + 1}</p>,
     },
     {
       title: "Avatar",
       dataIndex: "avatar",
       key: "avatar",
       render: (avatar) => <img src={avatar} alt="avatar"></img>,
-
     },
     {
       title: "full name",
@@ -168,7 +177,7 @@ export default function TutorTable() {
     {
       title: "Gender",
       key: "gender",
-      render: (a) => (a.gender === 0? <p>Male</p> : <p>Female</p>)
+      render: (a) => (a.gender === 0 ? <p>Male</p> : <p>Female</p>),
     },
     {
       title: "Experience",
@@ -187,17 +196,23 @@ export default function TutorTable() {
       key: "action",
       render: (a) => (
         <Space size="middle">
-          <button className="btn none" onClick={() => handleSeeDetail(a)}><FaRegEye /></button>
-          <button className="btn none" onClick={() => handleEdit(a)}><FaEdit /></button>
+          <button className="btn none" onClick={() => handleSeeDetail(a)}>
+            <FaRegEye />
+          </button>
+          <button className="btn none" onClick={() => handleEdit(a)}>
+            <FaEdit />
+          </button>
           {/* <Link to={`/admin/manage-tutors/edit-${a.id}`} className="btn none"><FaEdit /></Link> */}
-          <button className="btn none" onClick={() => handleDelete(a.id)}><FaTrashAlt /></button>
+          <button className="btn none" onClick={() => handleDelete(a.id)}>
+            <FaTrashAlt />
+          </button>
         </Space>
       ),
     },
   ];
   return (
     <>
-    <div className="title-table flex">
+      <div className="title-table flex">
         <h3>TUTOR LIST</h3>
         <Tag color="blue" className="tag">
           <FaPlusCircle className="mt-5 mr-5" />
@@ -206,5 +221,5 @@ export default function TutorTable() {
       </div>
       <Table columns={columns} dataSource={dataTutors} />
     </>
-  )
+  );
 }
