@@ -50,9 +50,7 @@ export default function AddTutorForm(props) {
       area: values.area,
       avatar: avatarLink,
     };
-    console.log(newTutor);
-    console.log(dataTutors)
-    dataTutors.push(newTutor);
+    dataTutors.unshift(newTutor);
     localStorage.setItem("tutors", JSON.stringify(dataTutors));
     form.resetFields()
     message.success("Add class in successfully");

@@ -8,7 +8,7 @@ import { FaEdit, FaTrashAlt, FaRegEye, FaPlusCircle } from "react-icons/fa";
 export default function ClassTable() {
   const data = JSON.parse(localStorage.getItem("classes")) || [];
   const items = data.map((item) => ({ key: item.id, ...item }));
-  const [dataClasses, setDataClasses] = useState(items.reverse());
+  const [dataClasses, setDataClasses] = useState(items);
 
   const handleDelete = (id) => {
     Modal.confirm({

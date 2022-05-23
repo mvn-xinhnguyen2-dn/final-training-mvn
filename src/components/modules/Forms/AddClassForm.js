@@ -21,6 +21,7 @@ const validateMessages = {
 
 export default function AddClassForm(props) {
   const [form] = Form.useForm();
+  // const dataClasses = props.dataClasses;
   const dataClasses = props.dataClasses;
 
   const onFinish = (values) => {
@@ -40,7 +41,8 @@ export default function AddClassForm(props) {
       genderOfStudent: values.genderOfStudent,
       status: true
     };
-    dataClasses.push(newClass);
+    // setDataClasses([newClass, ...dataClasses])
+    dataClasses.unshift(newClass);
     localStorage.setItem("classes", JSON.stringify(dataClasses));
     form.resetFields()
     message.success("Add class in successfully");

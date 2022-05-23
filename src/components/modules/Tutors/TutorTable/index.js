@@ -14,7 +14,7 @@ export default function TutorTable() {
     {key : item.id,
     ...item
     }))
-  const [dataTutors, setDataTutors] = useState(items.reverse());
+  const [dataTutors, setDataTutors] = useState(items);
 
   const handleDelete = (id) => {
     Modal.confirm({
