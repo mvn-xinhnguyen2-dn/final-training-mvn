@@ -4,6 +4,7 @@ import { Header, Footer } from "./components/layouts";
 import React, { Suspense } from "react";
 import PrivateRoute from "./core/guards/PrivateRoute";
 import { DataClass } from "./data";
+import { Spin } from "antd";
 
 const Auth = React.lazy(() => import("./pages/Auth"));
 const Admin = React.lazy(() => import("./pages/Features/Admin"));
@@ -15,7 +16,7 @@ function App() {
       <DataClass />
       <Header />
       <main className="page-main">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className="center mt-30"><Spin /></div>}>
           <Switch>
             <PrivateRoute path="/admin">
               <Admin />
