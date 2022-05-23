@@ -36,7 +36,7 @@ export default function AddClassPage(props) {
     <>
       <Layout className="site-layout">
         <Content>
-          <Breadcrumb>
+          <Breadcrumb className="pl-30 pt-10">
             <Breadcrumb.Item>Manage Classes</Breadcrumb.Item>
             <Breadcrumb.Item>Add new class</Breadcrumb.Item>
           </Breadcrumb>

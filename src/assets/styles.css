@@ -599,15 +599,18 @@ label {
     width: 100%; }
 
 .form-add-class {
-  margin: 20px auto;
-  margin: 1.25rem auto;
+  margin: 30px 0px 0px 30px;
+  margin: 1.875rem 0rem 0rem 1.875rem;
   padding: 20px;
   padding: 1.25rem;
-  border: 1px solid;
-  width: 85%; }
+  max-width: 1024px;
+  max-width: 64rem;
+  border: 1px solid; }
   .form-add-class .ant-form-item-label {
     text-align: left; }
   .form-add-class.tutor {
+    margin: 30px;
+    margin: 1.875rem;
     width: 65%; }
 
 .ant-checkbox-wrapper + .ant-checkbox-wrapper {
@@ -1091,7 +1094,11 @@ a {
 .title-table {
   margin-top: 30px;
   margin-top: 1.875rem;
-  justify-content: space-around;
+  margin-left: 30px;
+  margin-left: 1.875rem;
+  max-width: 1024px;
+  max-width: 64rem;
+  justify-content: space-between;
   align-items: center; }
   .title-table h3 {
     color: #d61523; }

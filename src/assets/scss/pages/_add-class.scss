@@ -1,6 +1,8 @@
 .title-table {
   @include pxRem(margin-top, 30);
-  justify-content: space-around;
+  @include pxRem(margin-left, 30);
+  @include pxRem(max-width, 1024);
+  justify-content: space-between;
   align-items: center;
   h3 {
     color: map-get($colors, txt-hover);

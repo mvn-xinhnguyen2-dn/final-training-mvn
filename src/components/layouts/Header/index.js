@@ -11,6 +11,8 @@ export default function Header() {
   const user = JSON.parse(localStorage.getItem("user"));
   const data = JSON.parse(localStorage.getItem("accounts"));
 
+  const username = useSelector((state) => state.username);
+  console.log(username)
   let findName = [{ name: "" }];
   if (isLogger === true) {
     findName = data.find((item) => {
