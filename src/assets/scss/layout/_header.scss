@@ -13,12 +13,17 @@
 .header-left {
   .brand-title {
     .brand-name {
-      @include pxRem(font-size, 22)
+      @include pxRem(font-size, 22);
+    }
+    p {
+      &:hover {
+        color: map-get($colors, txt-hover);
+      }
     }
   }
 }
 .header-right {
-  border-bottom: 80px solid map-get($colors,bg-blue-dark );
+  border-bottom: 80px solid map-get($colors, bg-blue-dark);
   border-left: 90px solid transparent;
   height: 0;
   width: 100%;
@@ -46,9 +51,12 @@
   }
 }
 .social-list {
+  align-items: baseline;
   .social-item {
     a:-webkit-any-link {
       color: map-get($colors, white);
+      display: flex;
+      align-items: center;
     }
     color: map-get($colors, white);
     font-size: 18px;

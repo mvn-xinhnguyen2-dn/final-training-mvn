@@ -1,7 +1,6 @@
 .title-table {
-  @include pxRem(margin-top, 30);
-  @include pxRem(margin-left, 30);
-  @include pxRem(max-width, 1024);
+  @include pxRem(margin, 30 30 0 30);
+  @include pxRem(max-width, 100%);
   justify-content: space-between;
   align-items: center;
   h3 {

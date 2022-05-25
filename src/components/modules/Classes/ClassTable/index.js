@@ -207,13 +207,10 @@ export default function ClassTable() {
       key: "action",
       render: (a) => (
         <Space size="middle">
-          <Link
-            className="btn none"
-            to={`/admin/manage-classes/detail-${a.id}`}
-          >
+          <Link className="btn none" to={`/admin/manage-classes/${a.id}`}>
             <FaRegEye />
           </Link>
-          <Link className="btn none" to={`/admin/manage-classes/edit-${a.id}`}>
+          <Link className="btn none" to={`/admin/manage-classes/${a.id}/edit`}>
             <FaEdit />
           </Link>
           <button className="btn none" onClick={() => handleDelete(a.id)}>

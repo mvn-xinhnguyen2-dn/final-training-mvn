@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useField from "../../../hooks/useField";
-import { DataTutor, DataAccount } from "../../../data";
+import { DataTutor } from "../../../data";
 import loginImg from "../../../assets/images/login-img.png";
-import { message } from 'antd';
-
+import { message } from "antd";
+import { getInfoUser } from "../../../store/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const { login } = useAuth();
   const email = useField("email");
   const password = useField("password");
+  const dispatch = useDispatch();
 
   const data = [
     {
@@ -20,7 +22,7 @@ export default function Login() {
       email: "admin@gmail.com",
       password: "123456",
     },
-  ]
+  ];
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -29,11 +31,12 @@ export default function Login() {
     });
 
     if (findInfo === undefined) {
-      message.error("Email or Password does not exist!")
+      message.error("Email or Password does not exist!");
       return;
     } else {
-      message.success("Logged in successfully")
+      message.success("Logged in successfully");
       login(email.value, password.value);
+      dispatch(getInfoUser(findInfo));
     }
   };
 
@@ -41,7 +44,6 @@ export default function Login() {
     <div className="page-main-login">
       <div className="container flex py-30">
         <DataTutor />
-        <DataAccount />
         <div className="login-image col-7">
           <img src={loginImg} alt="img" />
         </div>
@@ -49,26 +51,28 @@ export default function Login() {
           <h2 className="center">Login</h2>
           <form onSubmit={(e) => handleOnSubmit(e)}>
             <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="text"
-                placeholder="name123@gmail.com..."
-                required
-                {...email}
-              />
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                name="password"
-                placeholder="Password"
-                required
-                {...password}
-              />
-              <button type="submit" className="btn login-submit mt-20">
-                Login
-              </button>
-              <Link to="/auth/forgot-pasword" className="btn">Forgot Password</Link>
+            <input
+              id="email"
+              name="email"
+              type="text"
+              placeholder="name123@gmail.com..."
+              required
+              {...email}
+            />
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              placeholder="Password"
+              required
+              {...password}
+            />
+            <button type="submit" className="btn login-submit mt-20">
+              Login
+            </button>
+            <Link to="/auth/forgot-pasword" className="btn">
+              Forgot Password
+            </Link>
           </form>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Header, Footer } from "./components/layouts";
 import React, { Suspense } from "react";
 import PrivateRoute from "./core/guards/PrivateRoute";
-import { DataClass } from "./data";
+import { DataAccount, DataClass } from "./data";
 import { Spin } from "antd";
 
 const Auth = React.lazy(() => import("./pages/Auth"));
@@ -14,6 +14,7 @@ function App() {
   return (
     <>
       <DataClass />
+      <DataAccount />
       <Header />
       <main className="page-main">
         <Suspense

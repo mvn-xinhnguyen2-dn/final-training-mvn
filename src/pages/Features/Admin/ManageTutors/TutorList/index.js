@@ -9,7 +9,7 @@ export default function TutorList(props) {
     <>
       <Layout className="site-layout">
         <Content>
-          <Breadcrumb className="pl-30 pt-10">
+          <Breadcrumb className="pl-30 pt-20">
             <Breadcrumb.Item>Admin</Breadcrumb.Item>
             <Breadcrumb.Item>Manage Tutors</Breadcrumb.Item>
           </Breadcrumb>

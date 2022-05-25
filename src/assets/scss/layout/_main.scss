@@ -1,4 +1,8 @@
 .page-main {
   @include pxRem(padding, 0 0);
-  min-height: 80vh;
+  min-height: 85vh;
+}
+.ant-breadcrumb {
+  @include pxRem(font-size, 16);
+  padding-top: 10px;
 }

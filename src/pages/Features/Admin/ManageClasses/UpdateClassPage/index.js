@@ -62,7 +62,7 @@ export default function UpdateClassPage(props) {
     <>
       <Layout className="site-layout">
         <Content>
-          <Breadcrumb className="pl-30 pt-10">
+          <Breadcrumb className="pl-30 pt-20">
             <Breadcrumb.Item>Manage Classes</Breadcrumb.Item>
             <Breadcrumb.Item>Update new class</Breadcrumb.Item>
           </Breadcrumb>
@@ -74,12 +74,7 @@ export default function UpdateClassPage(props) {
                 <Link to="/admin/manage-classes">Back</Link>
               </Tag>
             </div>
-            <ClassForm
-              // dataClassUpdate={classItem}
-              // dataClasses={dataClasses}
-              form={form}
-              onFinish={onUpdateClass}
-            />
+            <ClassForm form={form} onFinish={onUpdateClass} />
           </div>
         </Content>
       </Layout>

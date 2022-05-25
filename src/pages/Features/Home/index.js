@@ -28,12 +28,12 @@ export default function Home() {
             type="primary"
             onClick={(num) => {
               setNumberClass(numberClass + 3);
-              setDataClasses([...data.slice(0, numberClass + 3)]);
+              setDataClasses([...data.slice(0, numberClass + 6)]);
             }}
           >
-            More
+            Read more
           </Button>
-          <Button
+          {/* <Button
             type="primary"
             onClick={(num) => {
               setNumberClass(numberClass - 3);
@@ -41,7 +41,7 @@ export default function Home() {
             }}
           >
             Hiden
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>

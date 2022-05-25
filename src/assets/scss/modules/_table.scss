@@ -1,29 +1,29 @@
 table {
-  @include pxRem(max-width, 1024);
+  @include pxRem(max-width, 100%);
   border-collapse: collapse;
-  th, td {
+  th,
+  td {
     @include pxRem(padding, 10);
     border: 1px solid map-get($colors, border-gray);
   }
 }
 .ant-spin-container {
-  @include pxRem(max-width, 1024);
+  @include pxRem(max-width, 100%);
 }
 .ant-table-wrapper {
-  @include pxRem(padding, 30)
-
+  @include pxRem(padding, 30);
 }
 .ant-table-thead {
   tr {
-    background-color: map-get($colors, bg-gray ) !important;
+    background-color: map-get($colors, bg-gray) !important;
   }
 }
 .ant-table-tbody > tr > td {
-  @include pxRem(padding, 0 10 !important) ;
+  @include pxRem(padding, 0 10 !important);
 }
 
 .ant-table-tbody > tr:hover {
-  background-color: map-get($colors, bg-gray )!important;
+  background-color: map-get($colors, bg-gray) !important;
 }
 .ant-table-cell {
   img {

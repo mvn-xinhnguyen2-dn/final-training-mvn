@@ -73,16 +73,15 @@ label {
   }
 }
 .form-add-class {
-  @include pxRem(margin, 30 0 0 30);
+  @include pxRem(margin, 30 30 0 30);
   @include pxRem(padding, 20);
-  @include pxRem(max-width, 1024);
+  @include pxRem(max-width, 100%);
   border: 1px solid;
   .ant-form-item-label {
     text-align: left;
   }
   &.tutor {
     @include pxRem(margin, 30);
-    width: 65%;
   }
 }
 .ant-checkbox-wrapper + .ant-checkbox-wrapper {

@@ -26,7 +26,6 @@ export default function AddClassPage(props) {
       genderOfStudent: values.genderOfStudent,
       status: true,
     };
-    // setDataClasses([newClass, ...dataClasses])
     dataClasses.unshift(newClass);
     localStorage.setItem("classes", JSON.stringify(dataClasses));
     form.resetFields();
@@ -36,7 +35,7 @@ export default function AddClassPage(props) {
     <>
       <Layout className="site-layout">
         <Content>
-          <Breadcrumb className="pl-30 pt-10">
+          <Breadcrumb className="pl-30 pt-20">
             <Breadcrumb.Item>Manage Classes</Breadcrumb.Item>
             <Breadcrumb.Item>Add new class</Breadcrumb.Item>
           </Breadcrumb>

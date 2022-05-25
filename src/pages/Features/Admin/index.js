@@ -39,7 +39,7 @@ export default function Admin() {
                   <span>
                     <FaUserCog />
                   </span>
-                  <span className="sider-nav-item-name">Manage Accounts</span>
+                  <span className="sider-nav-item-name">Accounts</span>
                 </NavLink>
               </li>
               <li className="sider-nav-item">

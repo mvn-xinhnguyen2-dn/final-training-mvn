@@ -5,20 +5,18 @@ import { FaSignInAlt, FaSignOutAlt, FaHeart, FaGithub } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 export default function Header() {
+  const { logout } = useAuth();
   const favs = useSelector((state) => state.fav.value);
-  const { isLogger, logout } = useAuth();
+  const username = useSelector((state) => state.user.value);
+  const statusLogin = useSelector((state) => state.statusLogin.value);
 
+  const status = JSON.parse(localStorage.getItem("statusLoginLocal"));
   const user = JSON.parse(localStorage.getItem("user"));
-  const data = JSON.parse(localStorage.getItem("accounts"));
 
-  const username = useSelector((state) => state.username);
-  console.log(username)
-  let findName = [{ name: "" }];
-  if (isLogger === true) {
-    findName = data.find((item) => {
-      return user.email === item.email;
-    });
-  }
+  localStorage.setItem(
+    "statusLoginLocal",
+    JSON.stringify(!statusLogin || user?.name ? true : false)
+  );
 
   return (
     <>
@@ -52,20 +50,34 @@ export default function Header() {
                 </li>
               </ul>
             </nav>
-            <ul className="social-list mt-10 flex">
-              <li className={`social-item p-15 ${!isLogger}`}>
+            <ul className="social-list mt-10 flex ">
+              <li className={`social-item p-15 ${status || false}`}>
                 <Link to="/auth/login">
                   <FaSignInAlt />
+                  <span className="px-5">Login</span>
                 </Link>
               </li>
-              <li className={`social-item p-15 ${isLogger}`}>
+              <li className={`social-item p-15 ${!status || false}`}>
                 <Link to="/admin">
-                  {isLogger ? <span>{findName.name}</span> : <span></span>}
+                  {username !== "" ? (
+                    <span>
+                      {username?.email ? username.email : user?.email}
+                    </span>
+                  ) : (
+                    <span></span>
+                  )}
                 </Link>
               </li>
-              <li className="social-item p-15">
+              <li className={`social-item p-15 ${!status || false}`}>
                 <Link to="/" onClick={() => logout()}>
-                  <FaSignOutAlt />
+                  {username.email ? (
+                    <>
+                      <FaSignOutAlt />
+                      <span className="px-5">Logout</span>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </Link>
               </li>
               <li className="social-item p-15">
