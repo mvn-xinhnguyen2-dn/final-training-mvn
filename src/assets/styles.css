@@ -916,6 +916,8 @@ table {
   font-size: 16px;
   font-size: 1rem;
   padding-top: 10px; }
+  .ant-breadcrumb ol {
+    border-bottom: 2px solid #e4e4e4; }
 
 .page-footer {
   padding: 10px;
@@ -1093,7 +1095,6 @@ a {
       padding: 10px 0; }
 
 .support-info {
-  margin-top: -30px;
   padding: 10px;
   box-shadow: 0 0.1px 12px 0 hwb(165deg 82% 17%/60%); }
 

@@ -62,7 +62,7 @@ export default function UpdateClassPage(props) {
     <>
       <Layout className="site-layout">
         <Content>
-          <Breadcrumb className="pl-30 pt-20">
+          <Breadcrumb className="px-30 pt-20">
             <Breadcrumb.Item>Manage Classes</Breadcrumb.Item>
             <Breadcrumb.Item>Update new class</Breadcrumb.Item>
           </Breadcrumb>

@@ -5,4 +5,7 @@
 .ant-breadcrumb {
   @include pxRem(font-size, 16);
   padding-top: 10px;
+  ol {
+    border-bottom: 2px solid map-get($colors, border-gray );
+  }
 }

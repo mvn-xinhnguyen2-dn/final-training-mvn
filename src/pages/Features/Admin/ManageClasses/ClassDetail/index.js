@@ -21,7 +21,7 @@ export default function ClassDetail(props) {
         ></Route>
         <Layout className="site-layout">
           <Content>
-            <Breadcrumb className="pl-30 pt-10">
+            <Breadcrumb className="px-30 pt-10">
               <Breadcrumb.Item>Manage Classes</Breadcrumb.Item>
               <Breadcrumb.Item>Detail</Breadcrumb.Item>
             </Breadcrumb>

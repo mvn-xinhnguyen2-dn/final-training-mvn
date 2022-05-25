@@ -8,7 +8,7 @@ export default function ClassList() {
     <>
       <Layout className="site-layout">
         <Content>
-          <Breadcrumb className="pl-30 pt-20">
+          <Breadcrumb className="px-30 pt-20">
             <Breadcrumb.Item>Admin</Breadcrumb.Item>
             <Breadcrumb.Item>Manage Classes</Breadcrumb.Item>
           </Breadcrumb>
