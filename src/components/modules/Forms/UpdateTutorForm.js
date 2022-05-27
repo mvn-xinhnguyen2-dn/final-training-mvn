@@ -91,7 +91,7 @@ export default function UpdateTutorForm(props) {
       avatar: avatarLink || isEditingTutor.avatar,
     };
     // form.resetFields();
-    message.success("Update class in successfully");
+    message.success("Update tutor in successfully");
     updateItem2Local(updateTutor);
   };
 

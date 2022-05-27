@@ -22,6 +22,7 @@ export default function ClassDetail(props) {
         <Layout className="site-layout">
           <Content>
             <Breadcrumb className="px-30 pt-20">
+              <Breadcrumb.Item><Link to="/admin">Admin</Link></Breadcrumb.Item>
               <Breadcrumb.Item><Link to="/admin/manage-classes">Manage Classes</Link></Breadcrumb.Item>
               <Breadcrumb.Item>Detail</Breadcrumb.Item>
             </Breadcrumb>

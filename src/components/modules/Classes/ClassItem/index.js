@@ -8,9 +8,19 @@ import { Tag } from "antd";
 export default function ClassItem(props) {
   const dispatch = useDispatch();
   const favs = useSelector((state) => state.fav.value);
-
+  const favsList = JSON.parse(localStorage.getItem("favsList")) || [];
+  
+  console.log(favs)
+  console.log(favsList)
   const handleFav = (e, id) => {
     e.preventDefault();
+    const idx = favsList.indexOf(id);
+      if (idx !== -1) {
+        favsList.splice(idx, 1);
+      } else {
+        favsList.push(id);
+      }
+    localStorage.setItem("favsList", JSON.stringify(favsList))
     dispatch(toggle(id));
     console.log(id);
   };
@@ -40,7 +50,7 @@ export default function ClassItem(props) {
         >
           <FaHeart
             className={`icon-fav ${
-              favs.includes(props.item.id) ? "active" : ""
+              favsList.includes(props.item.id) ? "active" : ""
             }`}
           />
         </span>

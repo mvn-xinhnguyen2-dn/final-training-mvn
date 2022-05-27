@@ -48,12 +48,12 @@ export default function TutorTable() {
             <img src={item.avatar} alt="avatar" />
           </div>
           <div>
-            <div>Name: {item.fullName}</div>
-            <div>Gender: {item.gender === 0 ? "Male" : "Female"}</div>
-            <div>Experience: {item.experience}</div>
-            <div>Year: {item.yearOfBirth}</div>
-            <div>Phone: {item.phone}</div>
-            <div>Area: {item.area}</div>
+            <div><b>Name: </b>{item.fullName}</div>
+            <div><b>Gender: </b>{item.gender === 0 ? "Male" : "Female"}</div>
+            <div><b>Experience: </b>{item.experience}</div>
+            <div><b>Year: </b>{item.yearOfBirth}</div>
+            <div><b>Phone: </b>{item.phone}</div>
+            <div><b>Area: </b>{item.area}</div>
           </div>
         </div>
       ),

@@ -1,12 +1,13 @@
 import React from "react";
 import { ClassForm } from "../../../../../components/modules/Forms";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Layout, Breadcrumb, Tag, message, Form } from "antd";
 import { FaUndo } from "react-icons/fa";
 const { Content } = Layout;
 
 export default function UpdateClassPage(props) {
   const [form] = Form.useForm();
+  let history = useHistory();
 
   const dataClasses = props.dataClasses;
   const { id } = useParams();
@@ -41,6 +42,7 @@ export default function UpdateClassPage(props) {
       genderOfStudent: values.genderOfStudent,
     };
     updateItem2Local(updateClass);
+    history.push("/admin/manage-classes");
   };
 
   const updateItem2Local = (updateClass) => {
@@ -63,9 +65,13 @@ export default function UpdateClassPage(props) {
       <Layout className="site-layout">
         <Content>
           <Breadcrumb className="px-30 pt-20">
-          <Breadcrumb.Item><Link to="/admin">Admin</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="/admin/manage-classes">Manage Classes</Link></Breadcrumb.Item>
-            <Breadcrumb.Item>Update new class</Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link to="/admin">Admin</Link>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link to="/admin/manage-classes">Manage Classes</Link>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>Update class</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
             <div className="title-table flex">

@@ -9,8 +9,8 @@ export default function Header() {
   const favs = useSelector((state) => state.fav.value);
   const username = useSelector((state) => state.user.value);
   const statusLogin = useSelector((state) => state.statusLogin.value);
-  console.log(favs)
   const user = JSON.parse(localStorage.getItem("user"));
+  const favsList = JSON.parse(localStorage.getItem("favsList"));
 
   localStorage.setItem("statusLoginLocal",JSON.stringify(statusLogin));
 
@@ -53,7 +53,7 @@ export default function Header() {
                   <span className="px-5">Login</span>
                 </Link>
               </li>
-              <li className={`social-item p-15`}>
+              <li className={`social-item p-15 ${statusLogin}`}>
                 <Link to="/admin">
                   {statusLogin ? (
                     <><FaUserCheck /><span className="px-5">{username?.email ? username.email : user?.email}</span></>
@@ -62,7 +62,7 @@ export default function Header() {
                   )}
                 </Link>
               </li>
-              <li className={`social-item p-15`}>
+              <li className={`social-item p-15 ${statusLogin}`}>
                 <Link to="/" onClick={() => logout()}>
                   {statusLogin ? (
                     <><FaSignOutAlt /><span className="px-5">Logout</span></>
@@ -74,9 +74,9 @@ export default function Header() {
               <li className="social-item p-15">
                 <Link to="/">
                   <FaHeart />
-                  {!!favs.length && (
-                    <span className="fav-count">{favs.length}</span>
-                  )}
+                  {favsList?.length > 0 ? (
+                    <span className="fav-count">{favsList?.length || favs?.length}</span>
+                  ):<></>}
                 </Link>
               </li>
               <li className="social-item p-15">
