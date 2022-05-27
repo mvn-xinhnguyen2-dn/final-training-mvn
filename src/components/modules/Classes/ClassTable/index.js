@@ -39,7 +39,6 @@ export default function ClassTable() {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
-
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -137,11 +136,10 @@ export default function ClassTable() {
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "Salary",
-      // dataIndex: "salary",
+      title: "Salary (1000VND)",
       key: "salary",
-      ...getColumnSearchProps("Salary"),
-      render: (a) => <p>{a.salary}.000 VND</p>,
+      ...getColumnSearchProps("salary"),
+      render: (a) => <p>{a.salary}</p>,
       sorter: (a, b) => a.salary - b.salary,
       sortDirections: ["descend", "ascend"],
     },
@@ -150,14 +148,12 @@ export default function ClassTable() {
       dataIndex: "time",
       key: "time",
       ...getColumnSearchProps("time"),
-      sorter: (a, b) => a.time - b.time,
-      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Number of sessions / week",
       dataIndex: "numberOfSessions",
       key: "numberOfSessions",
-      ...getColumnSearchProps("number Of Sessions"),
+      ...getColumnSearchProps("numberOfSessions"),
       sorter: (a, b) => a.numberOfSessions - b.numberOfSessions,
       sortDirections: ["descend", "ascend"],
     },
@@ -166,8 +162,6 @@ export default function ClassTable() {
       dataIndex: "district",
       key: "district",
       ...getColumnSearchProps("district"),
-      sorter: (a, b) => a.district - b.district,
-      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Status",
@@ -229,7 +223,7 @@ export default function ClassTable() {
           <Link to="/admin/manage-classes/add-class">Add new</Link>
         </Tag>
       </div>
-      <Table columns={columns} dataSource={dataClasses} />
+      <Table columns={columns} dataSource={dataClasses} pagination={{pageSize: 7}}/>
     </>
   );
 }

@@ -24,7 +24,7 @@ export default function Admin() {
   const dataTutors = tutorList;
   return (
     <>
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout style={{ minHeight: "82.2vh" }}>
         <Sider
           width={300}
           collapsible

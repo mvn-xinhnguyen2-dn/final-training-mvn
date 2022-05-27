@@ -19,7 +19,7 @@ const useAuth = () => {
         history.push("/admin/accounts");
         res({ email });
       }, 1000);
-      dispatch(getStatusLogin(!isLogger));
+      dispatch(getStatusLogin(true));
     });
   };
   const logout = () => {
@@ -27,7 +27,7 @@ const useAuth = () => {
     setIsLogger(false);
     history.push("/");
     message.success("Logout in successfully");
-    dispatch(getStatusLogin(isLogger));
+    dispatch(getStatusLogin(false));
   };
   return { isLogger, login, logout };
 };

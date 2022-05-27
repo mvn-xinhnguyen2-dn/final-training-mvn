@@ -4,9 +4,6 @@ input[type="tel"],
 input[type="number"],
 select,
 textarea {
-  // @include pxRem("padding", 8);
-  // @include pxRem("height", 40);
-  // @include pxRem(border-radius, 8);
   width: 100%;
   border: 1px solid map-get($colors, border-gray);
   color: map-get($colors, txt-primary);
@@ -76,7 +73,8 @@ label {
   @include pxRem(margin, 30 30 0 30);
   @include pxRem(padding, 20);
   @include pxRem(max-width, 100%);
-  border: 1px solid;
+  background-color: #fff;
+  border: 2px solid map-get($colors, border-gray );
   .ant-form-item-label {
     text-align: left;
   }

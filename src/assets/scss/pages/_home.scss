@@ -40,7 +40,7 @@ a {
   }
 }
 .panel-info {
-  --panel-item-height: 150px;
+  --panel-item-height: 140px;
   margin-top: calc(var(--panel-item-height)/2*(-1));
   position: relative;
   &-list {
@@ -55,9 +55,14 @@ a {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    transition: 0.3s linear;
     &:hover {
       background-color:  map-get($colors, txt-hover);
     }
+  }
+  &-title {
+    font-size: 18px;
+    padding: 10px 0;
   }
 }
 .class-list {
@@ -68,12 +73,14 @@ a {
     @include pxRem(padding, 10);
     width: 31%;
     align-items: center;
-    box-shadow: 0 0.1px 12px 0 rgba(107, 182, 158, 0.668);
+    // box-shadow: 0 0.1px 12px 0 rgba(107, 182, 158, 0.668);
     border-radius: 5px;
+    border: 1px solid map-get($colors, border-gray );
     list-style-type: none;
     position: relative;
+    transition: 0.3s ease-in;
     &:hover {
-      box-shadow: 0 0.1px 12px 0 rgba(47, 145, 195, 0.668);
+      box-shadow: 0 0.1px 12px 0 rgba(47, 146, 195, 0.341);
     }
     img {
       @include pxRem(width, 100);

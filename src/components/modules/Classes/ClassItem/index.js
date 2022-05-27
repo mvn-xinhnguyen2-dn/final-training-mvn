@@ -17,7 +17,7 @@ export default function ClassItem(props) {
   return (
     <>
       <li className="class-item col-4 pl-30">
-        <Link to={`/admin/manage-classes/detail-${props.item.id}`}>
+        <Link to={`/admin/manage-classes/${props.item.id}`}>
           <p>Class: {props.item.classname}</p>
           <p>
             Address: {props.item.street}, {props.item.district}{" "}

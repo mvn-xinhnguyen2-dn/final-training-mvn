@@ -1,15 +1,15 @@
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
-import AboutUs from "./AboutUs";
+// import AboutUs from "./AboutUs";
 import Admin from "./Admin";
 
 export default function Features() {
   return (
     <>
       <Switch>
-        <Route path="/about">
+        {/* <Route path="/about">
           <AboutUs />
-        </Route>
+        </Route> */}
         <Route path="/">
           <Home />
         </Route>

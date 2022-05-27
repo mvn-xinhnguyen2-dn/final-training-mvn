@@ -21,14 +21,13 @@ export default function ClassDetail(props) {
         ></Route>
         <Layout className="site-layout">
           <Content>
-            <Breadcrumb className="px-30 pt-10">
-              <Breadcrumb.Item>Manage Classes</Breadcrumb.Item>
+            <Breadcrumb className="px-30 pt-20">
+              <Breadcrumb.Item><Link to="/admin/manage-classes">Manage Classes</Link></Breadcrumb.Item>
               <Breadcrumb.Item>Detail</Breadcrumb.Item>
             </Breadcrumb>
-            <div className="site-layout-background flex mr-30">
-              <div className="col-9">
+            <div className="site-layout-background mr-30">
                 <div className="title-table flex">
-                  <h3 className="">Class Detail</h3>
+                  <h3 className="">CLASS DETAIL</h3>
                   <Tag color="blue" className="tag">
                     <FaUndo className="mt-5 mr-5" />
                     <Link to="/admin/manage-classes">Back</Link>
@@ -36,29 +35,25 @@ export default function ClassDetail(props) {
                 </div>
                 <div className="class-detail mx-auto flex">
                   <div className="class-detail-info col-6">
-                    <h4>Class info</h4>
-                    <p>Class: {classItem.classname}</p>
-                    <p>Salary: {classItem.salary}</p>
-                    <p>Time: {classItem.time}</p>
-                    <p>Number of sessions: {classItem.numberOfSessions}</p>
-                    <p>
-                      Gender of student:{" "}
-                      {classItem.genderOfStudent === 0 ? "Male" : "Female"}
+                    <p><b>Class: </b>{classItem.classname}</p>
+                    <p><b>Salary: </b>{classItem.salary*1000} VND</p>
+                    <p><b>Time: </b>{classItem.time}</p>
+                    <p><b>Number of sessions: </b>{classItem.numberOfSessions}</p>
+                    <p><b>
+                      Gender of student:</b>{classItem.genderOfStudent === 0 ? " Male" : " Female"}
                     </p>
                   </div>
                   <div className="class-detail-info col-6">
-                    <h4>Parent info</h4>
-                    <p>Name of parent: {classItem.nameParent}</p>
-                    <p>Phone: {classItem.phone}</p>
-                    <p>
-                      Address: {classItem.street}, {classItem.district}
+                    <p><b>Name of parent: </b>{classItem.nameParent}</p>
+                    <p><b>Phone: </b>{classItem.phone}</p>
+                    <p><b>
+                      Address: </b>{classItem.street}, {classItem.district}
                     </p>
-                    <p>
-                      Gender of parent:{" "}
-                      {classItem.genderOfParent === 0 ? "Male" : "Female"}
+                    <p><b>
+                      Gender of parent:</b>{classItem.genderOfParent === 0 ? " Male" : " Female"}
                     </p>
-                    <p>
-                      Status:{" "}
+                    <p><b>
+                      Status:{" "}</b>
                       {classItem.status ? (
                         <Tag color="green">Available</Tag>
                       ) : (
@@ -67,29 +62,6 @@ export default function ClassDetail(props) {
                     </p>
                   </div>
                 </div>
-              </div>
-              <div className="support-info col-3">
-                <div className="">
-                  <h4 className="center mb-10">CONTACT US</h4>
-                  <Tag className="tag ml-0 p-5 mb-10" color="orange">
-                    Phone: 0123456789
-                  </Tag>
-                  <br />
-                  <Tag className="tag ml-0 p-5 mb-10" color="green">
-                    Gmail: xinh@gmail.com
-                  </Tag>
-                </div>
-                <img
-                  src="https://akadon.edu.vn/static/media/fist-img.bd7dfbcd.svg"
-                  alt="banner"
-                />
-                <br />
-                <br />
-                <img
-                  src="https://akadon.edu.vn/static/media/online.bcbcf5e3.svg"
-                  alt="banner"
-                />
-              </div>
             </div>
           </Content>
         </Layout>

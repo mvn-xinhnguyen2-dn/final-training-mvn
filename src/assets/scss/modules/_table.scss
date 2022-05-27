@@ -19,19 +19,25 @@ table {
   }
 }
 .ant-table-tbody > tr > td {
-  @include pxRem(padding, 0 10 !important);
+  @include pxRem(padding, 0 5 !important);
+  line-height: 0px !important;
 }
 
-.ant-table-tbody > tr:hover {
-  background-color: map-get($colors, bg-gray) !important;
+td.ant-table-cell-row-hover {
+  transition: 0.2s;
+  background-color: #f1f1f1 !important;
 }
 .ant-table-cell {
   img {
     width: 100px;
     height: 100px;
     object-fit: cover;
+    padding: 5px 0;
   }
   text-align: center !important;
+  &::before {
+    height: 0 !important;
+  }
 }
 
 .tutor-detail {

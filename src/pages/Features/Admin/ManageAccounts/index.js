@@ -18,7 +18,6 @@ export default function ManageAccounts() {
   return (
     <>
     <Layout>
-
       <div className='page-account'>
         <div className='account'>
           <img src="https://wallpaperaccess.com/full/5064949.jpg" alt="background" />

@@ -12,14 +12,13 @@
 }
 .header-left {
   .brand-title {
+    // color: map-get($colors, black);
     .brand-name {
       @include pxRem(font-size, 22);
     }
-    p {
-      &:hover {
-        color: map-get($colors, txt-hover);
-      }
-    }
+  }
+  &:hover {
+    color: map-get($colors, txt-hover);
   }
 }
 .header-right {

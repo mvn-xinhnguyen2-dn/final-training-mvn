@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const username = localStorage.getItem("user");
 const initialState = {
-  value: "",
+  value: !!username,
 };
 
 export const loginSlice = createSlice({

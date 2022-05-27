@@ -33,15 +33,6 @@ export default function Home() {
           >
             Read more
           </Button>
-          {/* <Button
-            type="primary"
-            onClick={(num) => {
-              setNumberClass(numberClass - 3);
-              setDataClasses([...data.slice(0, numberClass - 3)]);
-            }}
-          >
-            Hiden
-          </Button> */}
         </div>
       </div>
     </>

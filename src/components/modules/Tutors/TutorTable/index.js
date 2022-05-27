@@ -92,7 +92,7 @@ export default function TutorTable() {
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
-            style={{ width: 90 }}
+            style={{ width: 90, marginLeft: 0}}
           >
             Search
           </Button>
@@ -163,7 +163,7 @@ export default function TutorTable() {
       render: (avatar) => <img src={avatar} alt="avatar"></img>,
     },
     {
-      title: "full name",
+      title: "Full name",
       dataIndex: "fullName",
       key: "fullName",
       ...getColumnSearchProps("fullName"),
@@ -219,7 +219,7 @@ export default function TutorTable() {
           <Link to="/admin/manage-tutors/add-tutor">Add new</Link>
         </Tag>
       </div>
-      <Table columns={columns} dataSource={dataTutors} />
+      <Table columns={columns} dataSource={dataTutors} pagination={{pageSize: 4}} />
     </>
   );
 }
