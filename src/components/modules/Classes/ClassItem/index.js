@@ -28,15 +28,15 @@ export default function ClassItem(props) {
     <>
       <li className="class-item col-4 pl-30">
         <Link to={`/admin/manage-classes/${props.item.id}`}>
-          <p>Class: {props.item.classname}</p>
+          <p><b>Class: </b>{props.item.classname}</p>
           <p>
-            Address: {props.item.street}, {props.item.district}{" "}
+            <b>Address: </b>{props.item.street}, {props.item.district}{" "}
           </p>
-          <p>Salary: {props.item.salary}.000 VND</p>
-          <p>Time: {props.item.time}</p>
-          <p>Number of sessions / week: {props.item.numberOfSessions}</p>
+          <p><b>Salary: </b>{props.item.salary}.000 VND</p>
+          <p><b>Time: </b>{props.item.time}</p>
+          <p><b>Number of sessions / week: </b>{props.item.numberOfSessions}</p>
           <p>
-            Status:{" "}
+            <b>Status: </b>
             {props.item.status ? (
               <Tag color="green">Available</Tag>
             ) : (

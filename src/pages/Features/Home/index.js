@@ -25,7 +25,7 @@ export default function Home() {
         </ul>
         <div className="num-class my-20 mx-auto flex">
           <Button
-            type="primary"
+            // type="primary"
             onClick={(num) => {
               setNumberClass(numberClass + 3);
               setDataClasses([...data.slice(0, numberClass + 6)]);

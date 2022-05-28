@@ -1,7 +1,7 @@
 a {
-  color: map-get($colors, primary );
+  color: map-get($colors, primary);
   &:hover {
-    color: inherit
+    color: inherit;
   }
 }
 
@@ -15,7 +15,7 @@ a {
       top: 0;
       left: 0;
       width: 100%;
-      filter: brightness(.3);
+      filter: brightness(0.3);
     }
   }
 }
@@ -24,40 +24,70 @@ a {
     bottom: 100px !important;
   }
 }
-  
+
 .banner-wrap-text {
   position: absolute;
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
   .banner-title {
-    @include pxRem(font-size,60);
-    color: map-get($colors, txt-hover );
-    font-weight: map-get($font-weight, bold );
+    @include pxRem(font-size, 60);
+    color: map-get($colors, txt-hover);
+    font-weight: map-get($font-weight, bold);
   }
   .banner-text {
-    color: map-get($colors, white );
+    color: map-get($colors, white);
+  }
+}
+@keyframes move {
+  0%,
+  100% {
+    bottom: 0;
+  }
+  50% {
+    bottom: 5px;
   }
 }
 .panel-info {
   --panel-item-height: 140px;
-  margin-top: calc(var(--panel-item-height)/2*(-1));
+  margin-top: calc(var(--panel-item-height) / 2 * (-1));
   position: relative;
   &-list {
-    @include pxRem (gap, 30);
-    color: map-get($colors, white );
+    @include pxRem(gap, 30);
+    color: map-get($colors, white);
     justify-content: center;
   }
   &-item {
     @include pxRem(height, var(--panel-item-height));
-    background-color: map-get($colors, bg-blue-dark );
+    background-color: map-get($colors, bg-blue-dark);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    flex-direction: row;
+    align-items: center;
     transition: 0.3s linear;
+    position: relative;
     &:hover {
-      background-color:  map-get($colors, txt-hover);
+      // background: linear-gradient(to top right, map-get($colors, txt-hover), rgb(247, 112, 112));
+      background-color: #1f305e;
+      svg {
+        animation: move 1s linear infinite;
+        position: relative;
+        display: block;
+        transition: 1s linear;
+      }
+      svg.info-icon {
+        animation: move 1s linear infinite;
+        top: 20px;
+        right: -10px;
+        position: absolute;
+        color: rgba(255, 255, 255, 0.238);
+      }
+    }
+    svg {
+      font-size: 30px;
+      margin: 0 30px;
+    }
+    .info-icon {
+      display: none;
     }
   }
   &-title {
@@ -73,9 +103,8 @@ a {
     @include pxRem(padding, 10);
     width: 31%;
     align-items: center;
-    // box-shadow: 0 0.1px 12px 0 rgba(107, 182, 158, 0.668);
     border-radius: 5px;
-    border: 1px solid map-get($colors, border-gray );
+    border: 1px solid map-get($colors, border-gray);
     list-style-type: none;
     position: relative;
     transition: 0.3s ease-in;
@@ -104,8 +133,9 @@ a {
       color: white;
     }
     &:hover {
-      background-color: map-get($colors, bg-blue-dark );
+      background-color: #1f305e;
+      color: white;
+      border: none;
     }
   }
 }
-

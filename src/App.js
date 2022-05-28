@@ -4,7 +4,7 @@ import { Header, Footer } from "./components/layouts";
 import React, { Suspense } from "react";
 import PrivateRoute from "./core/guards/PrivateRoute";
 import { DataAccount, DataClass } from "./data";
-import { Spin } from "antd";
+import { Spin, BackTop } from "antd";
 
 const Auth = React.lazy(() => import("./pages/Auth"));
 const Admin = React.lazy(() => import("./pages/Features/Admin"));
@@ -37,6 +37,8 @@ function App() {
           </Switch>
         </Suspense>
       </main>
+      <BackTop />
+      <strong className="site-back-top-basic"></strong>
       <Footer />
     </>
   );

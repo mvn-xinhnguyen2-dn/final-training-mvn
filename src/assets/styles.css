@@ -997,9 +997,16 @@ a {
   .banner-wrap-text .banner-text {
     color: #fff; }
 
+@keyframes move {
+  0%,
+  100% {
+    bottom: 0; }
+  50% {
+    bottom: 5px; } }
+
 .panel-info {
   --panel-item-height: 140px;
-  margin-top: calc(var(--panel-item-height)/2*(-1));
+  margin-top: calc(var(--panel-item-height) / 2 * (-1));
   position: relative; }
   .panel-info-list {
     gap: 30px;
@@ -1010,12 +1017,28 @@ a {
     height: var(--panel-item-height);
     background-color: #151635;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    transition: 0.3s linear; }
+    flex-direction: row;
+    align-items: center;
+    transition: 0.3s linear;
+    position: relative; }
     .panel-info-item:hover {
-      background-color: #d61523; }
+      background-color: #1f305e; }
+      .panel-info-item:hover svg {
+        animation: move 1s linear infinite;
+        position: relative;
+        display: block;
+        transition: 1s linear; }
+      .panel-info-item:hover svg.info-icon {
+        animation: move 1s linear infinite;
+        top: 20px;
+        right: -10px;
+        position: absolute;
+        color: rgba(255, 255, 255, 0.238); }
+    .panel-info-item svg {
+      font-size: 30px;
+      margin: 0 30px; }
+    .panel-info-item .info-icon {
+      display: none; }
   .panel-info-title {
     font-size: 18px;
     padding: 10px 0; }
@@ -1059,7 +1082,9 @@ a {
       background-color: #00676b;
       color: white; }
     .num-class button:hover {
-      background-color: #151635; }
+      background-color: #1f305e;
+      color: white;
+      border: none; }
 
 .page-account .account {
   width: auto;
