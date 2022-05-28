@@ -1,12 +1,13 @@
 import React from "react";
 import { TutorForm } from "../../../../../components/modules/Forms";
-import { Link } from "react-router-dom";
-import { Layout, Breadcrumb, Tag, Form, message } from "antd";
+import { Link , useHistory } from "react-router-dom";
+import { Layout, Breadcrumb, Button, Form, message } from "antd";
 import { FaUndo } from "react-icons/fa";
 const { Content } = Layout;
 
 export default function AddTutorPage({ dataTutors }) {
   const [form] = Form.useForm();
+  let history = useHistory();
   const onAddTutor = (values) => {
     console.log(values);
     const id = `t${Math.floor(Math.random() * 101)}`;
@@ -26,6 +27,8 @@ export default function AddTutorPage({ dataTutors }) {
     localStorage.setItem("tutors", JSON.stringify(dataTutors));
     form.resetFields();
     message.success("Add class in successfully");
+    history.push("/admin/manage-tutors");
+
   };
 
   return (
@@ -40,10 +43,7 @@ export default function AddTutorPage({ dataTutors }) {
           <div className="site-layout-background">
             <div className="title-table flex">
               <h3>ADD NEW TUTOR</h3>
-              <Tag color="blue" className="tag">
-                <FaUndo className="mt-5 mr-5" />
-                <Link to="/admin/manage-tutors">Back</Link>
-              </Tag>
+              <Button onClick={() => history.goBack()}><FaUndo className="mt-5 mr-5" />Back</Button>
             </div>
             <TutorForm
               dataTutors={dataTutors}

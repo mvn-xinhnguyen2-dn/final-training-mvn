@@ -125,11 +125,14 @@ export default function ClassTable() {
     {
       title: "STT",
       key: "id",
+      fixed: "left",
+      width: 70,
       render: (a) => <p>{dataClasses.indexOf(a) + 1}</p>,
     },
     {
       title: "Class",
       key: "classname",
+      width: 70,
       ...getColumnSearchProps("classname"),
       render: (a) => <p>Class {a.classname}</p>,
       sorter: (a, b) => a.classname - b.classname,
@@ -138,6 +141,7 @@ export default function ClassTable() {
     {
       title: "Salary (1000VND)",
       key: "salary",
+      width: 100,
       ...getColumnSearchProps("salary"),
       render: (a) => <p>{a.salary}</p>,
       sorter: (a, b) => a.salary - b.salary,
@@ -147,12 +151,14 @@ export default function ClassTable() {
       title: "Time",
       dataIndex: "time",
       key: "time",
+      width: 100,
       ...getColumnSearchProps("time"),
     },
     {
       title: "Number of sessions / week",
       dataIndex: "numberOfSessions",
       key: "numberOfSessions",
+      width: 130,
       ...getColumnSearchProps("numberOfSessions"),
       sorter: (a, b) => a.numberOfSessions - b.numberOfSessions,
       sortDirections: ["descend", "ascend"],
@@ -161,11 +167,13 @@ export default function ClassTable() {
       title: "District",
       dataIndex: "district",
       key: "district",
+      width: 150,
       ...getColumnSearchProps("district"),
     },
     {
       title: "Status",
       key: "status",
+      width: 120,
       ...getColumnSearchProps("status"),
       render: (a) => (
         <Space>
@@ -195,10 +203,13 @@ export default function ClassTable() {
       title: "ID",
       dataIndex: "id",
       key: "id",
+      width: 50,
     },
     {
       title: "Action",
       key: "action",
+      fixed: "right",
+      width: 120,
       render: (a) => (
         <Space size="middle">
           <Link className="btn none" to={`/admin/manage-classes/${a.id}`}>
@@ -219,11 +230,20 @@ export default function ClassTable() {
       <div className="title-table flex">
         <h3>CLASS LIST</h3>
         <Tag color="blue" className="tag">
-          <FaPlusCircle className="mt-5 mr-5" />
-          <Link to="/admin/manage-classes/add-class">Add new</Link>
+          <Link to="/admin/manage-classes/add-class">
+            <FaPlusCircle className="mt-5 mr-5" />
+            Add new
+          </Link>
         </Tag>
       </div>
-      <Table columns={columns} dataSource={dataClasses} pagination={{pageSize: 7}}/>
+      <Table
+        columns={columns}
+        dataSource={dataClasses}
+        pagination={{ pageSize: 7 }}
+        scroll={{
+          x: 1300,
+        }}
+      />
     </>
   );
 }

@@ -37,7 +37,7 @@ function App() {
           </Switch>
         </Suspense>
       </main>
-      <BackTop />
+      <BackTop visibilityHeight = {200}/>
       <strong className="site-back-top-basic"></strong>
       <Footer />
     </>

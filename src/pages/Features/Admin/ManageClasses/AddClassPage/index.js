@@ -1,12 +1,13 @@
 import React from "react";
 import { ClassForm } from "../../../../../components/modules/Forms";
-import { Link } from "react-router-dom";
-import { Layout, Breadcrumb, Tag, Form, message } from "antd";
+import { Link , useHistory} from "react-router-dom";
+import { Layout, Breadcrumb, Form, message, Button } from "antd";
 import { FaUndo } from "react-icons/fa";
 const { Content } = Layout;
 
 export default function AddClassPage(props) {
   const dataClasses = props.dataClasses;
+  let history = useHistory();
   const [form] = Form.useForm();
 
   const onAddClass = (values) => {
@@ -30,6 +31,8 @@ export default function AddClassPage(props) {
     localStorage.setItem("classes", JSON.stringify(dataClasses));
     form.resetFields();
     message.success("Add class in successfully");
+    history.push("/admin/manage-classes");
+
   };
   return (
     <>
@@ -43,10 +46,7 @@ export default function AddClassPage(props) {
           <div className="site-layout-background">
             <div className="title-table flex">
               <h3>ADD NEW CLASS</h3>
-              <Tag color="blue" className="tag">
-                <FaUndo className="mt-5 mr-5" />
-                <Link to="/admin/manage-classes">Back</Link>
-              </Tag>
+              <Button onClick={() => history.goBack()}><FaUndo className="mt-5 mr-5" />Back</Button>
             </div>
             <ClassForm dataClasses={dataClasses} onFinish={onAddClass} />
           </div>

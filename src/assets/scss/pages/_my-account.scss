@@ -20,8 +20,8 @@
         left: 5%;
       }
       .account-text {
+        @include pxRem(left, 330);
         position: absolute;
-        left: 30%;
         p {
           @include pxRem(padding, 5 0);
         }

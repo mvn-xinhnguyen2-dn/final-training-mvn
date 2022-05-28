@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { Layout, Breadcrumb, Tag } from "antd";
+import { Layout, Breadcrumb, Tag , Button } from "antd";
 import { FaUndo } from "react-icons/fa";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route , useHistory } from "react-router-dom";
 import UpdateClassPage from "../UpdateClassPage";
 
 const { Content } = Layout;
@@ -11,6 +11,7 @@ export default function ClassDetail(props) {
   const dataClasses = props.dataClasses;
   const { id } = useParams();
   const classItem = dataClasses.find((item) => item.id === id);
+  let history = useHistory();
 
   return (
     <>
@@ -29,10 +30,8 @@ export default function ClassDetail(props) {
             <div className="site-layout-background mr-30">
                 <div className="title-table flex">
                   <h3 className="">CLASS DETAIL</h3>
-                  <Tag color="blue" className="tag">
-                    <FaUndo className="mt-5 mr-5" />
-                    <Link to="/admin/manage-classes">Back</Link>
-                  </Tag>
+                  <Button onClick={() => history.goBack()}><FaUndo className="mt-5 mr-5" />Back</Button>
+                    {/* <Link to="/admin/manage-classes">Back</Link> */}
                 </div>
                 <div className="class-detail mx-auto flex">
                   <div className="class-detail-info col-6">

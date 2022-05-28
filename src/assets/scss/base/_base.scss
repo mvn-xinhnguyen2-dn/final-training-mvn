@@ -6,6 +6,7 @@ body {
   font-weight: map-get($font-weight, normal);
   font-size: $font-size-base;
   letter-spacing: -.025em;
+  background-color: #f0f2f5;
 }
 p {
   line-height: 1.45;

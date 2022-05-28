@@ -41,6 +41,7 @@ export default function TutorTable() {
   };
   const handleSeeDetail = (item) => {
     Modal.success({
+      width: 500,
       title: `Information of tutor id : ${item.id}`,
       content: (
         <div className="tutor-detail flex">
@@ -154,46 +155,57 @@ export default function TutorTable() {
     {
       title: "STT",
       key: "id",
+      fixed: 'left',
+      width: 70,
       render: (a) => <p>{dataTutors.indexOf(a) + 1}</p>,
     },
     {
       title: "Avatar",
       dataIndex: "avatar",
       key: "avatar",
+      fixed: 'left',
+      width: 100,
       render: (avatar) => <img src={avatar} alt="avatar"></img>,
     },
     {
       title: "Full name",
       dataIndex: "fullName",
       key: "fullName",
+      width: 180,
       ...getColumnSearchProps("fullName"),
     },
     {
       title: "Year",
       dataIndex: "yearOfBirth",
       key: "yearOfBirth",
+      width: 100,
       ...getColumnSearchProps("yearOfBirth"),
     },
     {
       title: "Gender",
       key: "gender",
+      width: 80,
       render: (a) => (a.gender === 0 ? <p>Male</p> : <p>Female</p>),
     },
     {
       title: "Experience",
       dataIndex: "experience",
       key: "experience",
+      width: 200,
       ...getColumnSearchProps("experience"),
     },
     {
       title: "Area",
       dataIndex: "area",
       key: "area",
+      width: 130,
       ...getColumnSearchProps("area"),
     },
     {
       title: "Action",
       key: "action",
+      fixed: 'right',
+      width: 120,
       render: (a) => (
         <Space size="middle">
           <button className="btn none" onClick={() => handleSeeDetail(a)}>
@@ -215,11 +227,12 @@ export default function TutorTable() {
       <div className="title-table flex">
         <h3>TUTOR LIST</h3>
         <Tag color="blue" className="tag">
-          <FaPlusCircle className="mt-5 mr-5" />
-          <Link to="/admin/manage-tutors/add-tutor">Add new</Link>
+          <Link to="/admin/manage-tutors/add-tutor"><FaPlusCircle className="mt-5 mr-5" />Add new</Link>
         </Tag>
       </div>
-      <Table columns={columns} dataSource={dataTutors} pagination={{pageSize: 4}} />
+      <Table columns={columns} dataSource={dataTutors} pagination={{pageSize: 4}} scroll={{
+      x: 1300,
+    }}/>
     </>
   );
 }

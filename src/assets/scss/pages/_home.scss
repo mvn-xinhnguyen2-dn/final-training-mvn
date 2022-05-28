@@ -66,7 +66,6 @@ a {
     transition: 0.3s linear;
     position: relative;
     &:hover {
-      // background: linear-gradient(to top right, map-get($colors, txt-hover), rgb(247, 112, 112));
       background-color: #1f305e;
       svg {
         animation: move 1s linear infinite;
@@ -104,10 +103,11 @@ a {
     width: 31%;
     align-items: center;
     border-radius: 5px;
-    border: 1px solid map-get($colors, border-gray);
+    border: 2px solid map-get($colors, border-gray);
     list-style-type: none;
     position: relative;
     transition: 0.3s ease-in;
+    background-color: #fff;
     &:hover {
       box-shadow: 0 0.1px 12px 0 rgba(47, 146, 195, 0.341);
     }

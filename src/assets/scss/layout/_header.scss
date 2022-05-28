@@ -14,7 +14,7 @@
   .brand-title {
     // color: map-get($colors, black);
     .brand-name {
-      @include pxRem(font-size, 22);
+      @include pxRem(font-size, 21);
     }
   }
   &:hover {

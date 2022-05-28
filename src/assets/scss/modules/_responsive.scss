@@ -1,0 +1,51 @@
+@include respond-below (medium) {
+  * {
+    @include pxRem(font-size, 12);
+  }
+  .header-left {
+    .brand-title {
+      .brand-name {
+        @include pxRem(font-size, 16);
+      }
+      p {
+        display: none;
+      }
+    }
+  }
+  .fav-count {
+    @include pxRem(left, 25);
+  }
+  .banner-wrap-text {
+    width: 90%;
+    .banner-title {
+      @include pxRem(font-size, 50 !important);
+    }
+  }
+  .col-3, .col-4 {
+    width: 40% !important;
+  }
+  .panel-info-item svg {
+    margin: 0 15px !important;
+  }
+  .social-item:nth-child(3) {
+    a > span {
+      display: none;
+    }
+  }
+  .page-account .account {
+    >img {
+      @include pxRem(height, 200 !important);
+    }
+    .account-info 
+    {
+      .account-avatar {
+        @include pxRem(height, 150 !important);
+        @include pxRem(width, 150 !important);
+      }
+      .account-text {
+        top: 260px;
+        left: 30px !important;
+      }
+    }
+  }
+}

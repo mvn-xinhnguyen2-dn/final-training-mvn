@@ -1,8 +1,15 @@
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
-import { FaSignInAlt, FaSignOutAlt, FaHeart, FaGithub , FaUserCheck } from "react-icons/fa";
+import {
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaHeart,
+  FaGithub,
+  FaUserCheck,
+} from "react-icons/fa";
 import { useSelector } from "react-redux";
+// import { Menu, Dropdown } from "antd";
 
 export default function Header() {
   const { logout } = useAuth();
@@ -11,8 +18,26 @@ export default function Header() {
   const statusLogin = useSelector((state) => state.statusLogin.value);
   const user = JSON.parse(localStorage.getItem("user"));
   const favsList = JSON.parse(localStorage.getItem("favsList"));
+  // const favItems = (
+  //   <Menu
+  //     items={[
+  //       favsList.map((item) => {
+  //         let classFavs ="";
+  //         classFavs = (
+  //           [{
+  //             key: {item},
+  //             label: (
+  //                 <Link to={`/admin/manage-classes/${item}`}>See detail {item}</Link>
+  //             ),
+  //           }]
+  //         )
+  //         return classFavs;
+  //       }),
+  //     ]}
+  //   />
+  // );
 
-  localStorage.setItem("statusLoginLocal",JSON.stringify(statusLogin));
+  localStorage.setItem("statusLoginLocal", JSON.stringify(statusLogin));
 
   return (
     <>
@@ -56,8 +81,13 @@ export default function Header() {
               <li className={`social-item p-15 ${statusLogin}`}>
                 <Link to="/admin">
                   {statusLogin ? (
-                    <><FaUserCheck /><span className="px-5">{username?.email ? username.email : user?.email}</span></>
-                    ) : (
+                    <>
+                      <FaUserCheck />
+                      <span className="px-5">
+                        {username?.email ? username.email : user?.email}
+                      </span>
+                    </>
+                  ) : (
                     <></>
                   )}
                 </Link>
@@ -65,8 +95,11 @@ export default function Header() {
               <li className={`social-item p-15 ${statusLogin}`}>
                 <Link to="/" onClick={() => logout()}>
                   {statusLogin ? (
-                    <><FaSignOutAlt /><span className="px-5">Logout</span></>
-                    ) : (
+                    <>
+                      <FaSignOutAlt />
+                      <span className="px-5">Logout</span>
+                    </>
+                  ) : (
                     <></>
                   )}
                 </Link>
@@ -75,9 +108,25 @@ export default function Header() {
                 <Link to="/">
                   <FaHeart />
                   {favsList?.length > 0 ? (
-                    <span className="fav-count">{favsList?.length || favs?.length}</span>
-                  ):<></>}
+                    <span className="fav-count">
+                      {favsList?.length || favs?.length}
+                    </span>
+                  ) : (
+                    <></>
+                  )}
                 </Link>
+                {/* <Dropdown overlay={favItems}>
+                  <a href="/" onClick={(e) => e.preventDefault()}>
+                    <FaHeart />
+                    {favsList?.length > 0 ? (
+                      <span className="fav-count">
+                        {favsList?.length || favs?.length}
+                      </span>
+                    ) : (
+                      <></>
+                    )}
+                  </a>
+                </Dropdown> */}
               </li>
               <li className="social-item p-15">
                 <a href="https://github.com/mvn-xinhnguyen2-dn/final-training-mvn">

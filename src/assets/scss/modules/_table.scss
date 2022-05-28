@@ -22,7 +22,6 @@ table {
   @include pxRem(padding, 0 5 !important);
   line-height: 0px !important;
 }
-
 td.ant-table-cell-row-hover {
   transition: 0.2s;
   background-color: #f1f1f1 !important;
@@ -39,7 +38,6 @@ td.ant-table-cell-row-hover {
     height: 0 !important;
   }
 }
-
 .tutor-detail {
   align-items: center;
   img {

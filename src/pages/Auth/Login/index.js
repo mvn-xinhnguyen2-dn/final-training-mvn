@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useField from "../../../hooks/useField";
 import { DataTutor } from "../../../data";
@@ -70,9 +69,6 @@ export default function Login() {
             <button type="submit" className="btn login-submit mt-20">
               Login
             </button>
-            <Link to="/auth/forgot-pasword" className="btn">
-              Forgot Password
-            </Link>
           </form>
         </div>
       </div>

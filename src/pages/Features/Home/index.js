@@ -8,7 +8,6 @@ export default function Home() {
   const data = JSON.parse(localStorage.getItem("classes")) || [];
   const [numberClass, setNumberClass] = useState(6);
   const [dataClasses, setDataClasses] = useState([...data.slice(0, 6)]);
-  console.log(numberClass);
   return (
     <>
       <Banner />

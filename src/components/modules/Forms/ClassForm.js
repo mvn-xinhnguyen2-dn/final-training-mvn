@@ -83,14 +83,14 @@ export default function ClassForm({ onFinish, form }) {
             </Form.Item>
             <Form.Item
               name="salary"
-              label="Salary"
+              label="Salary (1000 VND)"
               rules={[
                 {
                   type: "number",
                 },
               ]}
             >
-              <InputNumber />
+              <InputNumber placeholder="1500" />
             </Form.Item>
             <Form.Item name="genderOfStudent" label="Gender of student">
               <Radio.Group>

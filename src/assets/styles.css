@@ -396,7 +396,8 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   font-size: 0.875rem;
-  letter-spacing: -.025em; }
+  letter-spacing: -.025em;
+  background-color: #f0f2f5; }
 
 p {
   line-height: 1.45; }
@@ -439,7 +440,6 @@ h6 {
   bottom: 20px;
   bottom: 1.25rem;
   font-size: 20px;
-  font-size: 1.25rem;
   color: wheat; }
   .icon-fav:hover {
     transform: scale(1.1);
@@ -675,6 +675,41 @@ td.ant-table-cell-row-hover {
   text-align: center;
   cursor: pointer; }
 
+@media (max-width: 767px) {
+  * {
+    font-size: 12px;
+    font-size: 0.75rem; }
+  .header-left .brand-title .brand-name {
+    font-size: 16px;
+    font-size: 1rem; }
+  .header-left .brand-title p {
+    display: none; }
+  .fav-count {
+    left: 25px;
+    left: 1.5625rem; }
+  .banner-wrap-text {
+    width: 90%; }
+    .banner-wrap-text .banner-title {
+      font-size: 50px !important;
+      font-size: 3.125rem !important; }
+  .col-3, .col-4 {
+    width: 40% !important; }
+  .panel-info-item svg {
+    margin: 0 15px !important; }
+  .social-item:nth-child(3) a > span {
+    display: none; }
+  .page-account .account > img {
+    height: 200px !important;
+    height: 12.5rem !important; }
+  .page-account .account .account-info .account-avatar {
+    height: 150px !important;
+    height: 9.375rem !important;
+    width: 150px !important;
+    width: 9.375rem !important; }
+  .page-account .account .account-info .account-text {
+    top: 260px;
+    left: 30px !important; } }
+
 .flex {
   display: flex; }
 
@@ -868,8 +903,8 @@ td.ant-table-cell-row-hover {
     align-items: center; }
 
 .header-left .brand-title .brand-name {
-  font-size: 22px;
-  font-size: 1.375rem; }
+  font-size: 21px;
+  font-size: 1.3125rem; }
 
 .header-left:hover {
   color: #d61523; }
@@ -1054,10 +1089,11 @@ a {
     width: 31%;
     align-items: center;
     border-radius: 5px;
-    border: 1px solid #e4e4e4;
+    border: 2px solid #e4e4e4;
     list-style-type: none;
     position: relative;
-    transition: 0.3s ease-in; }
+    transition: 0.3s ease-in;
+    background-color: #fff; }
     .class-list .class-item:hover {
       box-shadow: 0 0.1px 12px 0 rgba(47, 146, 195, 0.341); }
     .class-list .class-item img {
@@ -1106,8 +1142,9 @@ a {
     top: 50%;
     left: 5%; }
   .page-account .account .account-info .account-text {
-    position: absolute;
-    left: 30%; }
+    left: 330px;
+    left: 20.625rem;
+    position: absolute; }
     .page-account .account .account-info .account-text p {
       padding: 5px 0px;
       padding: 0.3125rem 0rem; }
@@ -1135,7 +1172,7 @@ a {
       padding: 10px 30px;
       padding: 0.625rem 1.875rem; }
       .class-detail-info p:nth-of-type(2n) {
-        background-color: #f1f1f1; }
+        background-color: #f1f1f1cf; }
 
 .banner-right {
   padding-top: 10px;
