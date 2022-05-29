@@ -28,38 +28,20 @@ export default function UpdateClassPage(props) {
 
   const onUpdateClass = (values) => {
     message.success("Update class in successfully");
-    const updateClass = {
-      id: classItem.id,
-      classname: values.classname,
-      district: values.district,
-      street: values.street,
-      salary: values.salary,
-      time: values.time,
-      numberOfSessions: values.numberOfSessions,
-      phone: values.phone,
-      nameParent: values.nameParent,
-      genderOfParent: values.genderOfParent,
-      genderOfStudent: values.genderOfStudent,
-    };
-    updateItem2Local(updateClass);
+    classItem.classname = values.classname
+    classItem.district = values.district
+    classItem.street = values.street
+    classItem.salary = values.salary
+    classItem.time = values.time
+    classItem.numberOfSessions = values.numberOfSessions
+    classItem.phone = values.phone
+    classItem.nameParent = values.nameParent
+    classItem.genderOfParent = values.genderOfParent
+    classItem.genderOfStudent = values.genderOfStudent
+    localStorage.setItem("classes", JSON.stringify(dataClasses));
     history.push("/admin/manage-classes");
   };
 
-  const updateItem2Local = (updateClass) => {
-    let itemUpdate = dataClasses.find((item) => item.id === updateClass.id);
-    itemUpdate.id = updateClass.id;
-    itemUpdate.classname = updateClass.classname;
-    itemUpdate.district = updateClass.district;
-    itemUpdate.street = updateClass.street;
-    itemUpdate.salary = updateClass.salary;
-    itemUpdate.time = updateClass.time;
-    itemUpdate.phone = updateClass.phone;
-    itemUpdate.numberOfSessions = updateClass.numberOfSessions;
-    itemUpdate.nameParent = updateClass.nameParent;
-    itemUpdate.genderOfParent = updateClass.genderOfParent;
-    itemUpdate.genderOfStudent = updateClass.genderOfStudent;
-    localStorage.setItem("classes", JSON.stringify(dataClasses));
-  };
   return (
     <>
       <Layout className="site-layout">

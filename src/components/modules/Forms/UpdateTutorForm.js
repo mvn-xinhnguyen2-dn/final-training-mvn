@@ -80,31 +80,14 @@ export default function UpdateTutorForm(props) {
   });
 
   const onFinish = (values) => {
-    const updateTutor = {
-      id: isEditingTutor.id,
-      fullName: values.fullName,
-      yearOfBirth: values.yearOfBirth,
-      gender: values.gender,
-      phone: values.phone,
-      experience: values.experience,
-      area: values.area,
-      avatar: avatarLink || isEditingTutor.avatar,
-    };
-    // form.resetFields();
+    isEditingTutor.avatar = avatarLink || isEditingTutor.avatar
+    isEditingTutor.fullName = values.fullName
+    isEditingTutor.yearOfBirth = values.yearOfBirth
+    isEditingTutor.gender = values.gender
+    isEditingTutor.phone = values.phone
+    isEditingTutor.experience = values.experience
+    isEditingTutor.area = values.area
     message.success("Update tutor in successfully");
-    updateItem2Local(updateTutor);
-  };
-
-  const updateItem2Local = (updateTutor) => {
-    let itemUpdate = dataTutors.find((item) => item.id === updateTutor.id);
-    itemUpdate.id = updateTutor.id;
-    itemUpdate.fullName = updateTutor.fullName;
-    itemUpdate.yearOfBirth = updateTutor.yearOfBirth;
-    itemUpdate.gender = updateTutor.gender;
-    itemUpdate.phone = updateTutor.phone;
-    itemUpdate.experience = updateTutor.experience;
-    itemUpdate.area = updateTutor.area;
-    itemUpdate.avatar = updateTutor.avatar;
     localStorage.setItem("tutors", JSON.stringify(dataTutors));
   };
 
@@ -117,6 +100,27 @@ export default function UpdateTutorForm(props) {
         onFinish={onFinish}
         validateMessages={validateMessages}
       >
+        <Form.Item
+          label="Avatar"
+          valuePropName="fileList"
+          getValueFromEvent={normFile}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Upload
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            listType="picture-card"
+            fileList={fileList}
+            onChange={onChange}
+            onPreview={onPreview}
+          >
+            {fileList.length < 2 && "+ Upload"}
+          </Upload>
+          <p></p>
+        </Form.Item>
         <Form.Item
           name="fullName"
           label="Full name"
@@ -197,27 +201,6 @@ export default function UpdateTutorForm(props) {
           ]}
         >
           <Input />
-        </Form.Item>
-        <Form.Item
-          label="Avatar"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Upload
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            fileList={fileList}
-            onChange={onChange}
-            onPreview={onPreview}
-          >
-            {fileList.length < 2 && "+ Upload"}
-          </Upload>
-          <p></p>
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 5 }}>
           <Button type="primary" htmlType="submit">
