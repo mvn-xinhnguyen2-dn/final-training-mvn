@@ -1,4 +1,4 @@
-import { Table, Input, Button, Space, Modal, notification, Tag } from "antd";
+import { Table, Input, Button, Space, message, Popconfirm, notification, Tag } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
@@ -10,17 +10,14 @@ export default function ClassTable() {
   const items = data.map((item) => ({ key: item.id, ...item }));
   const [dataClasses, setDataClasses] = useState(items);
 
-  const handleDelete = (id) => {
-    Modal.confirm({
-      title: `Delete class id : ${id}`,
-      onOk: () => {
-        const newData = dataClasses.filter((e) => {
-          return e.id !== id;
-        });
-        setDataClasses(newData);
-        localStorage.setItem("classes", JSON.stringify(newData));
-      },
-    });
+  //Handle Delete confirm
+  const confirm = (id) => {
+    const newData = dataClasses.filter((e) => {
+        return e.id !== id;
+      });
+    setDataClasses(newData);
+    localStorage.setItem("classes", JSON.stringify(newData));
+    message.success('Delete successfully');
   };
 
   const [status, setStatus] = useState("");
@@ -218,9 +215,17 @@ export default function ClassTable() {
           <Link className="btn none" to={`/admin/manage-classes/${a.id}/edit`}>
             <FaEdit />
           </Link>
-          <button className="btn none" onClick={() => handleDelete(a.id)}>
-            <FaTrashAlt />
-          </button>
+          <Popconfirm
+            title="Are you sure to delete this class?"
+            placement="left"
+            onConfirm={()=>confirm(a.id)}
+            okText="Yes"
+            cancelText="Cancel"
+          >
+            <button className="btn none">
+              <FaTrashAlt />
+            </button>
+          </Popconfirm>
         </Space>
       ),
     },

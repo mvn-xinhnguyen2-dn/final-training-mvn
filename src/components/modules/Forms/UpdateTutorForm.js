@@ -87,7 +87,9 @@ export default function UpdateTutorForm(props) {
     isEditingTutor.phone = values.phone
     isEditingTutor.experience = values.experience
     isEditingTutor.area = values.area
-    message.success("Update tutor in successfully");
+    message
+    .loading('Action in progress..', 1.5)
+    .then(() => message.success('Update tutor in successfully', 1.5))
     localStorage.setItem("tutors", JSON.stringify(dataTutors));
   };
 

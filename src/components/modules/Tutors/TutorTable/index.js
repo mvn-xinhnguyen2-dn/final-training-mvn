@@ -1,4 +1,4 @@
-import { Table, Input, Button, Space, Modal, Tag } from "antd";
+import { Table, Input, Button, Space, Modal, Tag , Popconfirm, message } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
@@ -11,19 +11,18 @@ export default function TutorTable() {
   const items = data.map((item) => ({ key: item.id, ...item }));
   const [dataTutors, setDataTutors] = useState(items);
 
-  const handleDelete = (id) => {
-    Modal.confirm({
-      title: `Delete Tutor id : ${id}`,
-      onOk: () => {
-        const newData = dataTutors.filter((e) => {
-          return e.id !== id;
-        });
-        setDataTutors(newData);
-        localStorage.setItem("tutors", JSON.stringify(newData));
-      },
-    });
+
+//Handle Delete confirm
+  const confirm = (id) => {
+    const newData = dataTutors.filter((e) => {
+        return e.id !== id;
+      });
+    setDataTutors(newData);
+    localStorage.setItem("tutors", JSON.stringify(newData));
+    message.success('Delete successfully');
   };
 
+//Handle Edit 
   const handleEdit = (itemUpdate) => {
     Modal.info({
       width: 750,
@@ -33,12 +32,15 @@ export default function TutorTable() {
           <UpdateTutorForm tutorItem={itemUpdate} dataTutors={dataTutors} />
         </>
       ),
-      onOk: () => {
+      afterClose: () => {
         setDataTutors([...dataTutors]);
       },
       okText: "Close",
+      maskClosable: true,
     });
   };
+
+//Handle see detail
   const handleSeeDetail = (item) => {
     Modal.success({
       width: 500,
@@ -49,19 +51,35 @@ export default function TutorTable() {
             <img src={item.avatar} alt="avatar" />
           </div>
           <div>
-            <div><b>Name: </b>{item.fullName}</div>
-            <div><b>Gender: </b>{item.gender === 0 ? "Male" : "Female"}</div>
-            <div><b>Experience: </b>{item.experience}</div>
-            <div><b>Year: </b>{item.yearOfBirth}</div>
-            <div><b>Phone: </b>{item.phone}</div>
-            <div><b>Area: </b>{item.area}</div>
+            <div>
+              <b>Name: </b>
+              {item.fullName}
+            </div>
+            <div>
+              <b>Gender: </b>
+              {item.gender === 0 ? "Male" : "Female"}
+            </div>
+            <div>
+              <b>Experience: </b>
+              {item.experience}
+            </div>
+            <div>
+              <b>Year: </b>
+              {item.yearOfBirth}
+            </div>
+            <div>
+              <b>Phone: </b>
+              {item.phone}
+            </div>
+            <div>
+              <b>Area: </b>
+              {item.area}
+            </div>
           </div>
         </div>
       ),
-      onOk: () => {
-        console.log("ok");
-      },
       okText: "Close",
+      maskClosable: true,
     });
   };
 
@@ -93,7 +111,7 @@ export default function TutorTable() {
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
-            style={{ width: 90, marginLeft: 0}}
+            style={{ width: 90, marginLeft: 0 }}
           >
             Search
           </Button>
@@ -155,7 +173,7 @@ export default function TutorTable() {
     {
       title: "STT",
       key: "id",
-      fixed: 'left',
+      fixed: "left",
       width: 70,
       render: (a) => <p>{dataTutors.indexOf(a) + 1}</p>,
     },
@@ -163,7 +181,7 @@ export default function TutorTable() {
       title: "Avatar",
       dataIndex: "avatar",
       key: "avatar",
-      fixed: 'left',
+      fixed: "left",
       width: 100,
       render: (avatar) => <img src={avatar} alt="avatar"></img>,
     },
@@ -204,7 +222,7 @@ export default function TutorTable() {
     {
       title: "Action",
       key: "action",
-      fixed: 'right',
+      fixed: "right",
       width: 120,
       render: (a) => (
         <Space size="middle">
@@ -215,9 +233,17 @@ export default function TutorTable() {
             <FaEdit />
           </button>
           {/* <Link to={`/admin/manage-tutors/edit-${a.id}`} className="btn none"><FaEdit /></Link> */}
-          <button className="btn none" onClick={() => handleDelete(a.id)}>
-            <FaTrashAlt />
-          </button>
+          <Popconfirm
+            title="Are you sure to delete this tutor?"
+            placement="left"
+            onConfirm={()=>confirm(a.id)}
+            okText="Yes"
+            cancelText="Cancel"
+          >
+            <button className="btn none">
+              <FaTrashAlt />
+            </button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -227,12 +253,20 @@ export default function TutorTable() {
       <div className="title-table flex">
         <h3>TUTOR LIST</h3>
         <Tag color="blue" className="tag">
-          <Link to="/admin/manage-tutors/add-tutor"><FaPlusCircle className="mt-5 mr-5" />Add new</Link>
+          <Link to="/admin/manage-tutors/add-tutor">
+            <FaPlusCircle className="mt-5 mr-5" />
+            Add new
+          </Link>
         </Tag>
       </div>
-      <Table columns={columns} dataSource={dataTutors} pagination={{pageSize: 4}} scroll={{
-      x: 1300,
-    }}/>
+      <Table
+        columns={columns}
+        dataSource={dataTutors}
+        pagination={{ pageSize: 4 }}
+        scroll={{
+          x: 1300,
+        }}
+      />
     </>
   );
 }
