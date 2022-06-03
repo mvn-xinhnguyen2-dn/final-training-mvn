@@ -40,10 +40,13 @@ td.ant-table-cell-row-hover {
 }
 .tutor-detail {
   align-items: center;
+  border: 2px solid map-get($colors, border-gray);
+  border-radius: 3px;
+  padding: 10px 10px 5px 10px;
   img {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    margin-right: 10px;
+    margin-right: 20px;
   }
 }

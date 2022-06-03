@@ -44,7 +44,7 @@ export default function TutorTable() {
   const handleSeeDetail = (item) => {
     Modal.success({
       width: 500,
-      title: `Information of tutor id : ${item.id}`,
+      title: `Information of tutor:`,
       content: (
         <div className="tutor-detail flex">
           <div>

@@ -27,7 +27,7 @@ export default function ClassDetail(props) {
               <Breadcrumb.Item><Link to="/admin/manage-classes">Manage Classes</Link></Breadcrumb.Item>
               <Breadcrumb.Item>Detail</Breadcrumb.Item>
             </Breadcrumb>
-            <div className="site-layout-background mr-30">
+            <div className="site-layout-background">
                 <div className="title-table flex">
                   <h3 className="">CLASS DETAIL</h3>
                   <Button onClick={() => history.goBack()}><FaUndo className="mt-5 mr-5" />Back</Button>
