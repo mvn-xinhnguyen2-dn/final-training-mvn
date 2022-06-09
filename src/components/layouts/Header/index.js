@@ -17,13 +17,19 @@ export default function Header() {
   const username = useSelector((state) => state.user.value);
   const statusLogin = useSelector((state) => state.statusLogin.value);
   const user = JSON.parse(localStorage.getItem("user"));
-  const favsList = JSON.parse(localStorage.getItem("favsList"));
+  const favsList = JSON.parse(localStorage.getItem("favsList"))||[];
   const dataClasses = JSON.parse(localStorage.getItem("classes"));
-
   const favItems = (
     <Menu
       items={
-        favsList?.length !==0 ? 
+        favsList?.length ===0 ?  
+        [{
+          key:"abc",
+          label: (
+            <span>Empty!!!</span>
+          ),
+        }]
+        :
         favsList?.map((item) => {
           const itemHeart = dataClasses.find((info)=>{
             return info.id===item
@@ -41,13 +47,7 @@ export default function Header() {
             }
           )
           return classFavs;
-        }) :
-        [{
-          key:"abc",
-          label: (
-            <span>Empty!!!</span>
-          ),
-        }]
+        })
       }
     />
   );
@@ -115,7 +115,7 @@ export default function Header() {
                 </Link>
               </li>
               <li className="social-item p-15">
-                <Dropdown overlay={favItems} placement="bottomRight" arrow={{ pointAtCenter: true }} trigger={['click']}>
+                <Dropdown overlay={favItems} placement="bottomRight" arrow={{ pointAtCenter: true }}>
                   <a href="/" onClick={(e) => e.preventDefault()}>
                     <FaHeart />
                     {favsList?.length > 0 ? (
