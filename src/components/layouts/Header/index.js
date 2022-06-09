@@ -23,7 +23,7 @@ export default function Header() {
   const favItems = (
     <Menu
       items={
-        favsList.length !==0 ? 
+        favsList?.length !==0 ? 
         favsList?.map((item) => {
           const itemHeart = dataClasses.find((info)=>{
             return info.id===item
