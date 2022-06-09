@@ -946,6 +946,10 @@ td.ant-table-cell-row-hover {
   .social-list .true {
     display: block; }
 
+.ant-dropdown-menu-item-only-child:hover {
+  background-color: #d5d4d4 !important;
+  transition: .3s ease-in; }
+
 .page-main {
   padding: 0px 0px;
   padding: 0rem 0rem;

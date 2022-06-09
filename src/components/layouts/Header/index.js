@@ -9,7 +9,7 @@ import {
   FaUserCheck,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
-// import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, Tag } from "antd";
 
 export default function Header() {
   const { logout } = useAuth();
@@ -18,24 +18,30 @@ export default function Header() {
   const statusLogin = useSelector((state) => state.statusLogin.value);
   const user = JSON.parse(localStorage.getItem("user"));
   const favsList = JSON.parse(localStorage.getItem("favsList"));
-  // const favItems = (
-  //   <Menu
-  //     items={[
-  //       favsList.map((item) => {
-  //         let classFavs ="";
-  //         classFavs = (
-  //           [{
-  //             key: {item},
-  //             label: (
-  //                 <Link to={`/admin/manage-classes/${item}`}>See detail {item}</Link>
-  //             ),
-  //           }]
-  //         )
-  //         return classFavs;
-  //       }),
-  //     ]}
-  //   />
-  // );
+  const dataClasses = JSON.parse(localStorage.getItem("classes"));
+
+  const favItems = (
+    <Menu
+      items={favsList.map((item) => {
+        const itemHeart = dataClasses.find((info)=>{
+          return info.id===item
+        })
+        let classFavs ="";
+        classFavs = (
+          {
+            key: {item},
+            label: (
+              <Link to={`/admin/manage-classes/${item}`}> 
+                Class: {itemHeart.classname} {itemHeart.status?<Tag color="green">Available</Tag>:<Tag color="volcano">Disvailable</Tag>} <br/> 
+                Address: {itemHeart.street}, {itemHeart.district}.<br/>
+              </Link>
+            ),
+          }
+        )
+        return classFavs;
+      })}
+    />
+  );
 
   localStorage.setItem("statusLoginLocal", JSON.stringify(statusLogin));
 
@@ -59,11 +65,6 @@ export default function Header() {
                     HOME
                   </NavLink>
                 </li>
-                {/* <li className="header-right-nav-item p-15 mr-10">
-                  <NavLink to="/about" activeClassName="active">
-                    ABOUT
-                  </NavLink>
-                </li> */}
                 <li className="header-right-nav-item p-15 mr-10">
                   <NavLink to="/admin" activeClassName="active">
                     ADMIN
@@ -105,17 +106,7 @@ export default function Header() {
                 </Link>
               </li>
               <li className="social-item p-15">
-                <Link to="/">
-                  <FaHeart />
-                  {favsList?.length > 0 ? (
-                    <span className="fav-count">
-                      {favsList?.length || favs?.length}
-                    </span>
-                  ) : (
-                    <></>
-                  )}
-                </Link>
-                {/* <Dropdown overlay={favItems}>
+                <Dropdown overlay={favItems} placement="bottomRight" arrow={{ pointAtCenter: true }}>
                   <a href="/" onClick={(e) => e.preventDefault()}>
                     <FaHeart />
                     {favsList?.length > 0 ? (
@@ -126,7 +117,7 @@ export default function Header() {
                       <></>
                     )}
                   </a>
-                </Dropdown> */}
+                </Dropdown>
               </li>
               <li className="social-item p-15">
                 <a href="https://github.com/mvn-xinhnguyen2-dn/final-training-mvn">

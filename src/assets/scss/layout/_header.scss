@@ -71,3 +71,7 @@
     display: block;
   }
 }
+.ant-dropdown-menu-item-only-child:hover {
+ background-color: rgb(213, 212, 212) !important;
+ transition: .3s ease-in;
+}
