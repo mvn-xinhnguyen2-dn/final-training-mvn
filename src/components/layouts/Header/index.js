@@ -22,24 +22,33 @@ export default function Header() {
 
   const favItems = (
     <Menu
-      items={favsList.map((item) => {
-        const itemHeart = dataClasses.find((info)=>{
-          return info.id===item
-        })
-        let classFavs ="";
-        classFavs = (
-          {
-            key: {item},
-            label: (
-              <Link to={`/admin/manage-classes/${item}`}> 
-                Class: {itemHeart.classname} {itemHeart.status?<Tag color="green">Available</Tag>:<Tag color="volcano">Disvailable</Tag>} <br/> 
-                Address: {itemHeart.street}, {itemHeart.district}.<br/>
-              </Link>
-            ),
-          }
-        )
-        return classFavs;
-      })}
+      items={
+        favsList.length !==0 ? 
+        favsList?.map((item) => {
+          const itemHeart = dataClasses.find((info)=>{
+            return info.id===item
+          })
+          let classFavs ="";
+          classFavs = (
+            {
+              key: {item},
+              label: (
+                <Link to={`/admin/manage-classes/${item}`}> 
+                  Class: {itemHeart.classname} {itemHeart.status?<Tag color="green">Available</Tag>:<Tag color="volcano">Disvailable</Tag>} <br/> 
+                  Address: {itemHeart.street}, {itemHeart.district}.<br/>
+                </Link>
+              ),
+            }
+          )
+          return classFavs;
+        }) :
+        [{
+          key:"abc",
+          label: (
+            <span>Empty!!!</span>
+          ),
+        }]
+      }
     />
   );
 
@@ -106,7 +115,7 @@ export default function Header() {
                 </Link>
               </li>
               <li className="social-item p-15">
-                <Dropdown overlay={favItems} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+                <Dropdown overlay={favItems} placement="bottomRight" arrow={{ pointAtCenter: true }} trigger={['click']}>
                   <a href="/" onClick={(e) => e.preventDefault()}>
                     <FaHeart />
                     {favsList?.length > 0 ? (
