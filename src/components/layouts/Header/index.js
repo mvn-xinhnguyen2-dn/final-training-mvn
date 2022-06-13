@@ -17,37 +17,40 @@ export default function Header() {
   const username = useSelector((state) => state.user.value);
   const statusLogin = useSelector((state) => state.statusLogin.value);
   const user = JSON.parse(localStorage.getItem("user"));
-  const favsList = JSON.parse(localStorage.getItem("favsList"))||[];
+  const favsList = JSON.parse(localStorage.getItem("favsList")) || [];
   const dataClasses = JSON.parse(localStorage.getItem("classes"));
   const favItems = (
     <Menu
       items={
-        favsList?.length ===0 ?  
-        [{
-          key:"abc",
-          label: (
-            <span>Empty!!!</span>
-          ),
-        }]
-        :
-        favsList?.map((item) => {
-          const itemHeart = dataClasses.find((info)=>{
-            return info.id===item
-          })
-          let classFavs ="";
-          classFavs = (
-            {
-              key: {item},
-              label: (
-                <Link to={`/admin/manage-classes/${item}`}> 
-                  Class: {itemHeart.classname} {itemHeart.status?<Tag color="green">Available</Tag>:<Tag color="volcano">Disvailable</Tag>} <br/> 
-                  Address: {itemHeart.street}, {itemHeart.district}.<br/>
-                </Link>
-              ),
-            }
-          )
-          return classFavs;
-        })
+        favsList?.length === 0
+          ? [
+              {
+                key: "abc",
+                label: <span>Empty!!!</span>,
+              },
+            ]
+          : favsList?.map((item) => {
+              const itemHeart = dataClasses.find((info) => {
+                return info.id === item;
+              });
+              let classFavs = "";
+              classFavs = {
+                key: { item },
+                label: (
+                  <Link to={`/admin/manage-classes/${item}`}>
+                    Class: {itemHeart.classname}{" "}
+                    {itemHeart.status ? (
+                      <Tag color="green">Available</Tag>
+                    ) : (
+                      <Tag color="volcano">Disvailable</Tag>
+                    )}{" "}
+                    <br />
+                    Address: {itemHeart.street}, {itemHeart.district}.<br />
+                  </Link>
+                ),
+              };
+              return classFavs;
+            })
       }
     />
   );
@@ -82,7 +85,7 @@ export default function Header() {
               </ul>
             </nav>
             <ul className="social-list mt-10 flex ">
-              <li className={`social-item p-15 ${!statusLogin}`}>
+              {/* <li className={`social-item p-15 ${!statusLogin}`}>
                 <Link to="/auth/login">
                   <FaSignInAlt />
                   <span className="px-5">Login</span>
@@ -113,9 +116,46 @@ export default function Header() {
                     <></>
                   )}
                 </Link>
-              </li>
+              </li> */}
+              {statusLogin ? (
+                <>
+                  <li className={`social-item p-15`}>
+                    <Link to="/admin">
+                      {statusLogin && (
+                        <>
+                          <FaUserCheck />
+                          <span className="px-5">
+                            {username?.email ? username.email : user?.email}
+                          </span>
+                        </>
+                      )}
+                    </Link>
+                  </li>
+                  <li className={`social-item p-15`}>
+                    <Link to="/" onClick={() => logout()}>
+                      {statusLogin && (
+                        <>
+                          <FaSignOutAlt />
+                          <span className="px-5">Logout</span>
+                        </>
+                      )}
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li className={`social-item p-15`}>
+                  <Link to="/auth/login">
+                    <FaSignInAlt />
+                    <span className="px-5">Login</span>
+                  </Link>
+                </li>
+              )}
               <li className="social-item p-15">
-                <Dropdown overlay={favItems} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+                <Dropdown
+                  overlay={favItems}
+                  placement="bottomRight"
+                  arrow={{ pointAtCenter: true }}
+                >
                   <a href="/" onClick={(e) => e.preventDefault()}>
                     <FaHeart />
                     {favsList?.length > 0 ? (
