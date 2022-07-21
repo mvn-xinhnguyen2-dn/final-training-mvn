@@ -1,0 +1,7 @@
+.dashboard {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  > div {
+    margin: 20px 0;
+  }
+}

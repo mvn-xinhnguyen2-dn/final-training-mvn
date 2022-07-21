@@ -963,13 +963,34 @@ td.ant-table-cell-row-hover {
     border-bottom: 2px solid #e4e4e4; }
 
 .page-footer {
-  padding: 10px;
-  padding: 0.625rem;
-  line-height: 28px;
-  line-height: 1.75rem;
-  background: #151635;
-  text-align: center;
-  color: #fff; }
+  position: relative; }
+  .page-footer .footer-info {
+    padding: 10px;
+    padding: 0.625rem;
+    line-height: 28px;
+    line-height: 1.75rem;
+    background: #151635;
+    text-align: center;
+    color: #fff; }
+  .page-footer .wave {
+    position: absolute;
+    top: -200px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: rebeccapurple url(https://www.freepnglogos.com/uploads/wave-png/cool-wave-shapes-clipart-picture-12.png) no-repeat;
+    background-size: 1400px 200px; }
+    .page-footer .wave#wave1 {
+      z-index: 1000;
+      opacity: 1;
+      bottom: 0;
+      animation: animationWave 4s linear infinite; }
+
+@keyframes animationWave {
+  0% {
+    background-position-x: 1400px; }
+  100% {
+    background-position-x: 0px; } }
 
 .sider-nav h4 {
   color: #fff;
@@ -1200,3 +1221,9 @@ a {
   align-items: center; }
   .title-table h3 {
     color: #d61523; }
+
+.dashboard {
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  .dashboard > div {
+    margin: 20px 0; }
