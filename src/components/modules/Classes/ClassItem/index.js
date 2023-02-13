@@ -8,6 +8,7 @@ import { Tag } from "antd";
 export default function ClassItem(props) {
   const dispatch = useDispatch();
   const favsList = JSON.parse(localStorage.getItem("favsList")) || [];
+  // eslint-disable-next-line no-unused-vars
   const favs = useSelector((state) => state.fav.value);
   const handleFav = (e, id) => {
     e.preventDefault();
