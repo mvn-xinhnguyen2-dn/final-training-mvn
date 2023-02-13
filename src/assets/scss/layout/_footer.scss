@@ -1,11 +1,11 @@
 .page-footer{
   position: relative;
   .footer-info {
-    @include pxRem(padding, 10);
+    @include pxRem(padding, 10 10 5);
     @include pxRem(line-height, 28);
-    background: map-get($colors, bg-blue-dark);
+    // background: map-get($colors, bg-blue-dark);
     text-align: center;
-    color: map-get($colors, white);
+    // color: map-get($colors, white);
   }
   .wave {
     position:absolute;

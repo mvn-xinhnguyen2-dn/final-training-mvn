@@ -1,3 +1,4 @@
+import { getDatabase, ref, update } from "firebase/database";
 import React, { useState } from "react";
 import {
   Upload,
@@ -34,26 +35,24 @@ const normFile = (e) => {
   return e && e.fileList;
 };
 
-export default function UpdateTutorForm(props) {
+export default function UpdateTutorForm({ tutorItem, dataTutors }) {
   const [form] = Form.useForm();
-  const dataTutors = props.dataTutors;
-  const isEditingTutor = props.tutorItem;
   const [avatarLink, setAvatarLink] = useState("");
   const [fileList, setFileList] = useState([
     {
       uid: "-1",
       name: "image.png",
       status: "done",
-      url: `${isEditingTutor.avatar}`,
+      url: `${tutorItem.avatar}`,
     },
   ]);
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
+    newFileList[1].status="done"
     fileList.push(newFileList);
     setAvatarLink(fileList[1].thumbUrl);
   };
-
   const onPreview = async (file) => {
     let src = file.url;
     if (!src) {
@@ -70,27 +69,41 @@ export default function UpdateTutorForm(props) {
   };
 
   form.setFieldsValue({
-    fullName: isEditingTutor.fullName,
-    yearOfBirth: isEditingTutor.yearOfBirth,
-    gender: isEditingTutor.gender,
-    phone: isEditingTutor.phone,
-    experience: isEditingTutor.experience,
-    area: isEditingTutor.area,
-    avatar: isEditingTutor.avatar,
+    fullName: tutorItem.fullName,
+    yearOfBirth: tutorItem.yearOfBirth,
+    gender: tutorItem.gender,
+    phone: tutorItem.phone,
+    experience: tutorItem.experience,
+    area: tutorItem.area,
+    avatar: tutorItem.avatar,
   });
 
   const onFinish = (values) => {
-    isEditingTutor.avatar = avatarLink || isEditingTutor.avatar
-    isEditingTutor.fullName = values.fullName
-    isEditingTutor.yearOfBirth = values.yearOfBirth
-    isEditingTutor.gender = values.gender
-    isEditingTutor.phone = values.phone
-    isEditingTutor.experience = values.experience
-    isEditingTutor.area = values.area
+    const db = getDatabase();
+    const tutorUpdate = {
+      id: tutorItem.id,
+      avatar: avatarLink || tutorItem.avatar,
+      fullName: values.fullName,
+      yearOfBirth: values.yearOfBirth,
+      gender: values.gender,
+      phone: values.phone,
+      experience: values.experience,
+      area: values.area,
+    };
+    const updates = {};
+    updates["/tutors/" + tutorItem.id] = tutorUpdate;
     message
-    .loading('Action in progress..', 1.5)
-    .then(() => message.success('Update tutor in successfully', 1.5))
-    localStorage.setItem("tutors", JSON.stringify(dataTutors));
+      .loading("Action in progress..", 0.5)
+      .then(() => message.success("Update tutor in successfully", 0.5));
+    let itemUpdate = dataTutors.find((item) => item.id === tutorItem.id);
+    itemUpdate.avatar = avatarLink || tutorItem.avatar;
+    itemUpdate.fullName = values.fullName;
+    itemUpdate.yearOfBirth = values.yearOfBirth;
+    itemUpdate.gender = values.gender;
+    itemUpdate.phone = values.phone;
+    itemUpdate.experience = values.experience;
+    itemUpdate.area = values.area;
+    return update(ref(db), updates);
   };
 
   return (

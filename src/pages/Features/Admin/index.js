@@ -8,23 +8,17 @@ import {
   FaUserCog,
   FaUsers,
   FaRegNewspaper,
-  FaRegChartBar
+  FaRegChartBar,
 } from "react-icons/fa";
-
 import { Layout } from "antd";
-const { Sider } = Layout;
 
-export default function Admin() {
+export default function Admin({ dataClasses, dataTutors, currentUser }) {
+  const { Sider } = Layout;
   const [collapsed, setCollapsed] = useState(false);
 
-  const classes = JSON.parse(localStorage.getItem("classes")) || [];
-  const dataClasses = classes.map((item) => ({ key: item.id, ...item }));
-
-  const tutors = JSON.parse(localStorage.getItem("tutors")) || [];
-  const dataTutors = tutors.map((item) => ({ key: item.id, ...item }));
   return (
     <>
-      <Layout style={{ minHeight: "82.2vh" }}>
+      <Layout style={{ minHeight: "84.2vh" }}>
         <Sider
           width={300}
           collapsible
@@ -75,16 +69,16 @@ export default function Admin() {
             <ManageClasses dataClasses={dataClasses} />
           </Route>
           <Route path="/admin/dashboard">
-            <Dashboard dataClasses={dataClasses} dataTutors={dataTutors}/>
+            <Dashboard dataClasses={dataClasses} dataTutors={dataTutors} />
           </Route>
           <Route path="/admin/manage-tutors">
             <ManageTutors dataTutors={dataTutors} />
           </Route>
           <Route path="/admin/account">
-            <ManageAccounts />
+            <ManageAccounts currentUser={currentUser} />
           </Route>
           <Route path="/admin">
-            <ManageAccounts />
+            <ManageAccounts currentUser={currentUser} />
           </Route>
         </Switch>
       </Layout>

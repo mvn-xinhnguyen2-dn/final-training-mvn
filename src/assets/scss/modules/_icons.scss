@@ -1,7 +1,9 @@
+svg {
+  margin-bottom: -2px;
+}
 .icon-fav {
   @include pxRem(right, 20);
   @include pxRem(bottom, 20);
-  // @include pxRem(font-size, 20);
   font-size: 20px;
   color: wheat;
   &:hover {

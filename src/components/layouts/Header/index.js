@@ -11,14 +11,12 @@ import {
 import { useSelector } from "react-redux";
 import { Menu, Dropdown, Tag } from "antd";
 
-export default function Header() {
+export default function Header({ dataClasses, currentUser }) {
   const { logout } = useAuth();
   const favs = useSelector((state) => state.fav.value);
-  const username = useSelector((state) => state.user.value);
-  const statusLogin = useSelector((state) => state.statusLogin.value);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const statusLogin = currentUser?.status || false;
+  const user = currentUser;
   const favsList = JSON.parse(localStorage.getItem("favsList")) || [];
-  const dataClasses = JSON.parse(localStorage.getItem("classes"));
   const favItems = (
     <Menu
       items={
@@ -35,7 +33,7 @@ export default function Header() {
               });
               let classFavs = "";
               classFavs = {
-                key: { item },
+                key: itemHeart.id,
                 label: (
                   <Link to={`/admin/manage-classes/${item}`}>
                     Class: {itemHeart.classname}{" "}
@@ -43,7 +41,7 @@ export default function Header() {
                       <Tag color="green">Available</Tag>
                     ) : (
                       <Tag color="volcano">Disvailable</Tag>
-                    )}{" "}
+                    )}
                     <br />
                     Address: {itemHeart.street}, {itemHeart.district}.<br />
                   </Link>
@@ -54,8 +52,6 @@ export default function Header() {
       }
     />
   );
-
-  localStorage.setItem("statusLoginLocal", JSON.stringify(statusLogin));
 
   return (
     <>
@@ -85,38 +81,6 @@ export default function Header() {
               </ul>
             </nav>
             <ul className="social-list mt-10 flex ">
-              {/* <li className={`social-item p-15 ${!statusLogin}`}>
-                <Link to="/auth/login">
-                  <FaSignInAlt />
-                  <span className="px-5">Login</span>
-                </Link>
-              </li>
-              <li className={`social-item p-15 ${statusLogin}`}>
-                <Link to="/admin">
-                  {statusLogin ? (
-                    <>
-                      <FaUserCheck />
-                      <span className="px-5">
-                        {username?.email ? username.email : user?.email}
-                      </span>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </Link>
-              </li>
-              <li className={`social-item p-15 ${statusLogin}`}>
-                <Link to="/" onClick={() => logout()}>
-                  {statusLogin ? (
-                    <>
-                      <FaSignOutAlt />
-                      <span className="px-5">Logout</span>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </Link>
-              </li> */}
               {statusLogin ? (
                 <>
                   <li className={`social-item p-15`}>
@@ -124,9 +88,7 @@ export default function Header() {
                       {statusLogin && (
                         <>
                           <FaUserCheck />
-                          <span className="px-5">
-                            {username?.email ? username.email : user?.email}
-                          </span>
+                          <span className="px-5">{user.email}</span>
                         </>
                       )}
                     </Link>

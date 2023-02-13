@@ -1,28 +1,38 @@
-import { Table, Input, Button, Space, Modal, Tag , Popconfirm, message } from "antd";
+import {
+  Table,
+  Input,
+  Button,
+  Space,
+  Modal,
+  Tag,
+  Popconfirm,
+  message,
+} from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
 import { FaEdit, FaTrashAlt, FaRegEye, FaPlusCircle } from "react-icons/fa";
 import { UpdateTutorForm } from "../../Forms";
 import { Link } from "react-router-dom";
+import { getDatabase, ref, update } from "firebase/database";
 
-export default function TutorTable() {
-  const data = JSON.parse(localStorage.getItem("tutors")) || [];
-  const items = data.map((item) => ({ key: item.id, ...item }));
-  const [dataTutors, setDataTutors] = useState(items);
+export default function TutorTable({ dataTutors1 }) {
+  const [dataTutors, setDataTutors] = useState(dataTutors1);
+  const db = getDatabase();
 
-
-//Handle Delete confirm
+  //Handle Delete confirm
   const confirm = (id) => {
     const newData = dataTutors.filter((e) => {
-        return e.id !== id;
-      });
+      return e.id !== id;
+    });
     setDataTutors(newData);
-    localStorage.setItem("tutors", JSON.stringify(newData));
-    message.success('Delete successfully');
+    const updates = {};
+    updates["/tutors/" + id] = null;
+    message.success("Delete successfully");
+    return update(ref(db), updates);
   };
 
-//Handle Edit 
+  //Handle Edit
   const handleEdit = (itemUpdate) => {
     Modal.info({
       width: 750,
@@ -32,15 +42,12 @@ export default function TutorTable() {
           <UpdateTutorForm tutorItem={itemUpdate} dataTutors={dataTutors} />
         </>
       ),
-      afterClose: () => {
-        setDataTutors([...dataTutors]);
-      },
       okText: "Close",
       maskClosable: true,
     });
   };
 
-//Handle see detail
+  //Handle see detail
   const handleSeeDetail = (item) => {
     Modal.success({
       width: 500,
@@ -232,11 +239,10 @@ export default function TutorTable() {
           <button className="btn none" onClick={() => handleEdit(a)}>
             <FaEdit />
           </button>
-          {/* <Link to={`/admin/manage-tutors/edit-${a.id}`} className="btn none"><FaEdit /></Link> */}
           <Popconfirm
             title="Are you sure to delete this tutor?"
             placement="left"
-            onConfirm={()=>confirm(a.id)}
+            onConfirm={() => confirm(a.id)}
             okText="Yes"
             cancelText="Cancel"
           >
@@ -260,6 +266,7 @@ export default function TutorTable() {
         </Tag>
       </div>
       <Table
+        rowKey={(record) => record.id}
         columns={columns}
         dataSource={dataTutors}
         pagination={{ pageSize: 4 }}

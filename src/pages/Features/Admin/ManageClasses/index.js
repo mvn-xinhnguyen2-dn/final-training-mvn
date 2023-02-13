@@ -14,10 +14,9 @@ export default function ManageClasses({ dataClasses }) {
         <Route
           path="/admin/manage-classes/:id"
           children={<ClassDetail dataClasses={dataClasses} />}
-        >
-        </Route>
+        ></Route>
         <Route path="/admin/manage-classes/">
-          <ClassesList />
+          <ClassesList dataClasses={dataClasses} />
         </Route>
       </Switch>
     </>

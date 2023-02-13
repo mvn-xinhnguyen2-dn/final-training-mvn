@@ -1,48 +1,91 @@
-import useAuth from "../../../hooks/useAuth";
 import useField from "../../../hooks/useField";
-import { DataTutor } from "../../../data";
+import { GoogleButton } from "react-google-button";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, update } from "firebase/database";
+import { useHistory } from "react-router-dom";
+import { FaFacebook } from "react-icons/fa";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
+
 import loginImg from "../../../assets/images/login-img.png";
-import { message } from "antd";
-import { getInfoUser } from "../../../store/userSlice";
-import { useDispatch } from "react-redux";
+import { message, Button } from "antd";
+import { auth } from "../../../index";
 
 export default function Login() {
-  const { login } = useAuth();
   const email = useField("email");
   const password = useField("password");
-  const dispatch = useDispatch();
-
-  const data = [
-    {
-      email: "xinh@gmail.com",
-      password: "123456",
-    },
-    {
-      email: "admin@gmail.com",
-      password: "123456",
-    },
-  ];
+  const history = useHistory();
+  const db = getDatabase();
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    const findInfo = data.find((item) => {
-      return item.email === email.value && item.password === password.value;
-    });
+    signInWithEmailAndPassword(auth, email.value, password.value)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        let lgDate = new Date();
+        update(ref(db, "users/" + user.uid), {
+          last_login: lgDate,
+          status: true,
+          email: email.value,
+        })
+          .then(() => {
+            message.success("Welcome!!!");
+            history.push("/admin/accounts");
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      })
+      .catch(() => {
+        message.error("Email or Password does not exist!");
+      });
+  };
 
-    if (findInfo === undefined) {
-      message.error("Email or Password does not exist!");
-      return;
-    } else {
-      message.success("Logged in successfully");
-      login(email.value, password.value);
-      dispatch(getInfoUser(findInfo));
-    }
+  const provider = new GoogleAuthProvider();
+  provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+  const loginGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        message.success("Welcome!!!");
+        let lgDate = new Date();
+        update(ref(db, "users/" + user.uid), {
+          last_login: lgDate,
+          status: true,
+          email: user.email,
+        });
+      })
+      .catch((error) => {
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        message.error(credential);
+      });
+  };
+
+  const providerFacebook = new FacebookAuthProvider();
+  const loginFacebook = () => {
+    signInWithPopup(auth, providerFacebook)
+      .then((result) => {
+        const user = result.user;
+        message.success("Welcome!!!");
+        let lgDate = new Date();
+        update(ref(db, "users/" + user.uid), {
+          last_login: lgDate,
+          status: true,
+          email: user.displayName,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        alert(errorCode);
+      });
   };
 
   return (
     <div className="page-main-login">
       <div className="container flex py-30">
-        <DataTutor />
         <div className="login-image col-7">
           <img src={loginImg} alt="img" />
         </div>
@@ -70,6 +113,14 @@ export default function Login() {
               Login
             </button>
           </form>
+          <GoogleButton onClick={() => loginGoogle()} className="mt-10" />
+          <Button
+            icon={<FaFacebook className="mr-5" />}
+            onClick={() => loginFacebook()}
+            className="mt-10"
+          >
+            Login by Facebook
+          </Button>
         </div>
       </div>
     </div>

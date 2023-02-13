@@ -3,8 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import AddTutorPage from "./AddTutorPage";
 import TutorList from "./TutorList";
 
-export default function ManageTutors(props) {
-  const dataTutors = props.dataTutors;
+export default function ManageTutors({ dataTutors }) {
   return (
     <>
       <Switch>

@@ -1,36 +1,58 @@
-import { Table, Input, Button, Space, message, Popconfirm, notification, Tag } from "antd";
+import {
+  Table,
+  Input,
+  Button,
+  Space,
+  message,
+  Popconfirm,
+  notification,
+  Tag,
+} from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrashAlt, FaRegEye, FaPlusCircle } from "react-icons/fa";
+import { getDatabase, ref, update } from "firebase/database";
 
-export default function ClassTable() {
-  const data = JSON.parse(localStorage.getItem("classes")) || [];
-  const items = data.map((item) => ({ key: item.id, ...item }));
-  const [dataClasses, setDataClasses] = useState(items);
-
-  //Handle Delete confirm
+export default function ClassTable({ dataClasses1 }) {
+  const [dataClasses, setDataClasses] = useState(dataClasses1);
+  const db = getDatabase();
   const confirm = (id) => {
     const newData = dataClasses.filter((e) => {
-        return e.id !== id;
-      });
+      return e.id !== id;
+    });
     setDataClasses(newData);
-    localStorage.setItem("classes", JSON.stringify(newData));
-    message.success('Delete successfully');
+    const updates = {};
+    updates["/classes/" + id] = null;
+    message.success("Delete successfully");
+    return update(ref(db), updates);
   };
 
-  const [status, setStatus] = useState("");
   const handleStatus = (x) => {
-    setStatus(!x.status);
+    const updates = {};
+    const updateStatus = {
+      id: x.id,
+      classname: x.classname,
+      time: x.time,
+      salary: x.salary,
+      genderOfStudent: x.genderOfStudent,
+      nameParent: x.nameParent,
+      numberOfSessions: x.numberOfSessions,
+      district: x.district,
+      street: x.street,
+      phone: x.phone,
+      genderOfParent: x.genderOfParent,
+      status: !x.status,
+    };
     let itemStatus = dataClasses.find((item) => item.id === x.id);
     itemStatus.status = !x.status;
-    localStorage.setItem("classes", JSON.stringify(dataClasses));
-    setDataClasses([...dataClasses]);
+    updates["/classes/" + x.id] = updateStatus;
     notification.success({
       message: `Successful`,
       description: "Update status of class successfully!!!",
     });
+    return update(ref(db), updates);
   };
 
   const [searchText, setSearchText] = useState("");
@@ -129,18 +151,18 @@ export default function ClassTable() {
     {
       title: "Class",
       key: "classname",
-      width: 70,
+      width: 100,
       ...getColumnSearchProps("classname"),
       render: (a) => <p>Class {a.classname}</p>,
       sorter: (a, b) => a.classname - b.classname,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "Salary (1000VND)",
+      title: "Salary",
       key: "salary",
       width: 100,
       ...getColumnSearchProps("salary"),
-      render: (a) => <p>{a.salary}</p>,
+      render: (a) => <p>{`${a.salary}000 VND`}</p>,
       sorter: (a, b) => a.salary - b.salary,
       sortDirections: ["descend", "ascend"],
     },
@@ -152,7 +174,7 @@ export default function ClassTable() {
       ...getColumnSearchProps("time"),
     },
     {
-      title: "Number of sessions / week",
+      title: "Number/week",
       dataIndex: "numberOfSessions",
       key: "numberOfSessions",
       width: 130,
@@ -174,33 +196,17 @@ export default function ClassTable() {
       ...getColumnSearchProps("status"),
       render: (a) => (
         <Space>
-          {a.status === true ? (
-            <Tag
-              color="green"
-              className={`tag status ${status}`}
-              onClick={() => handleStatus(a)}
-            >
-              Available
-            </Tag>
-          ) : (
-            <Tag
-              color="volcano"
-              className={`tag status ${status}`}
-              onClick={() => handleStatus(a)}
-            >
-              Disvailable
-            </Tag>
-          )}
+          <Tag
+            color={a.status ? "green" : "volcano"}
+            className={`tag status ${a.status}`}
+            onClick={() => handleStatus(a)}
+          >
+            {a.status ? "Available" : "Disavailable"}
+          </Tag>
         </Space>
       ),
       sorter: (a, b) => a.status - b.status,
       sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-      width: 50,
     },
     {
       title: "Action",
@@ -218,7 +224,7 @@ export default function ClassTable() {
           <Popconfirm
             title="Are you sure to delete this class?"
             placement="left"
-            onConfirm={()=>confirm(a.id)}
+            onConfirm={() => confirm(a.id)}
             okText="Yes"
             cancelText="Cancel"
           >
@@ -242,6 +248,7 @@ export default function ClassTable() {
         </Tag>
       </div>
       <Table
+        rowKey={(record) => record.id}
         columns={columns}
         dataSource={dataClasses}
         pagination={{ pageSize: 7 }}

@@ -7,10 +7,8 @@ import { Tag } from "antd";
 
 export default function ClassItem(props) {
   const dispatch = useDispatch();
-  const favs = useSelector((state) => state.fav.value);
   const favsList = JSON.parse(localStorage.getItem("favsList")) || [];
-
-  console.log(favs);
+  const favs = useSelector((state) => state.fav.value);
   const handleFav = (e, id) => {
     e.preventDefault();
     const idx = favsList.indexOf(id);
@@ -24,48 +22,46 @@ export default function ClassItem(props) {
   };
   return (
     <>
-      <li className="class-item col-4 pl-30">
-        <Link to={`/admin/manage-classes/${props.item.id}`}>
-          <p>
-            <b>Class: </b>
-            {props.item.classname}
-          </p>
-          <p>
-            <b>Address: </b>
-            {props.item.street}, {props.item.district}{" "}
-          </p>
-          <p>
-            <b>Salary: </b>
-            {props.item.salary * 1000} VND
-          </p>
-          <p>
-            <b>Time: </b>
-            {props.item.time}
-          </p>
-          <p>
-            <b>Number of sessions / week: </b>
-            {props.item.numberOfSessions}
-          </p>
-          <p>
-            <b>Status: </b>
-            {props.item.status ? (
-              <Tag color="green">Available</Tag>
-            ) : (
-              <Tag color="volcano">Disvailable</Tag>
-            )}
-          </p>
-        </Link>
-        <span
-          className="product-fav"
-          onClick={(event) => handleFav(event, props.item.id)}
-        >
-          <FaHeart
-            className={`icon-fav ${
-              favsList.includes(props.item.id) ? "active" : ""
-            }`}
-          />
-        </span>
-      </li>
+      <Link to={`/admin/manage-classes/${props.item.id}`}>
+        <p>
+          <b>Class: </b>
+          {props.item.classname}
+        </p>
+        <p>
+          <b>Address: </b>
+          {props.item.street}, {props.item.district}{" "}
+        </p>
+        <p>
+          <b>Salary: </b>
+          {props.item.salary * 1000} VND
+        </p>
+        <p>
+          <b>Time: </b>
+          {props.item.time}
+        </p>
+        <p>
+          <b>Number of sessions / week: </b>
+          {props.item.numberOfSessions}
+        </p>
+        <p>
+          <b>Status: </b>
+          {props.item.status ? (
+            <Tag color="green">Available</Tag>
+          ) : (
+            <Tag color="volcano">Disvailable</Tag>
+          )}
+        </p>
+      </Link>
+      <span
+        className="product-fav"
+        onClick={(event) => handleFav(event, props.item.id)}
+      >
+        <FaHeart
+          className={`icon-fav ${
+            favsList.includes(props.item.id) ? "active" : ""
+          }`}
+        />
+      </span>
     </>
   );
 }

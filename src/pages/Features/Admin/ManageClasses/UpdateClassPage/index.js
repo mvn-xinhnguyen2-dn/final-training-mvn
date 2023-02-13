@@ -3,13 +3,12 @@ import { ClassForm } from "../../../../../components/modules/Forms";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Layout, Breadcrumb, Tag, message, Form } from "antd";
 import { FaUndo } from "react-icons/fa";
+import { getDatabase, ref, update } from "firebase/database";
 const { Content } = Layout;
 
-export default function UpdateClassPage(props) {
+export default function UpdateClassPage({ dataClasses }) {
   const [form] = Form.useForm();
   let history = useHistory();
-
-  const dataClasses = props.dataClasses;
   const { id } = useParams();
   const classItem = dataClasses.find((item) => item.id === id);
 
@@ -27,19 +26,26 @@ export default function UpdateClassPage(props) {
   });
 
   const onUpdateClass = (values) => {
+    const db = getDatabase();
     message.success("Update class in successfully");
-    classItem.classname = values.classname
-    classItem.district = values.district
-    classItem.street = values.street
-    classItem.salary = values.salary
-    classItem.time = values.time
-    classItem.numberOfSessions = values.numberOfSessions
-    classItem.phone = values.phone
-    classItem.nameParent = values.nameParent
-    classItem.genderOfParent = values.genderOfParent
-    classItem.genderOfStudent = values.genderOfStudent
-    localStorage.setItem("classes", JSON.stringify(dataClasses));
+    const classUpdate = {
+      id: id,
+      classname: values.classname,
+      time: values.time,
+      salary: values.salary,
+      genderOfStudent: values.genderOfStudent,
+      nameParent: values.nameParent,
+      numberOfSessions: values.numberOfSessions,
+      district: values.district,
+      street: values.street,
+      phone: values.phone,
+      genderOfParent: values.genderOfParent,
+      status: classItem.status,
+    };
+    const updates = {};
+    updates["/classes/" + id] = classUpdate;
     history.push("/admin/manage-classes");
+    return update(ref(db), updates);
   };
 
   return (
