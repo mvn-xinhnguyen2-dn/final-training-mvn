@@ -68,6 +68,9 @@ export default function Login() {
   const loginFacebook = () => {
     signInWithPopup(auth, providerFacebook)
       .then((result) => {
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        // eslint-disable-next-line no-unused-vars
+        const accessToken = credential.accessToken;
         const user = result.user;
         message.success("Welcome!!!");
         let lgDate = new Date();
