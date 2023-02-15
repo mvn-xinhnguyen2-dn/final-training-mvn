@@ -1,9 +1,8 @@
 import useField from "../../../hooks/useField";
-import { GoogleButton } from "react-google-button";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, update } from "firebase/database";
 import { useHistory } from "react-router-dom";
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebookF, FaGoogle, FaLock, FaUser } from "react-icons/fa";
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -93,37 +92,49 @@ export default function Login() {
           <img src={loginImg} alt="img" />
         </div>
         <div className="login-form col-5">
-          <h2 className="center">Login</h2>
+          <h3 className="center">SIGN IN</h3>
           <form onSubmit={(e) => handleOnSubmit(e)}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="text"
-              placeholder="name123@gmail.com..."
-              required
-              {...email}
-            />
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              placeholder="Password"
-              required
-              {...password}
-            />
-            <button type="submit" className="btn login-submit mt-20">
-              Login
+            <div className="flex align-items-center justify-content-center my-20">
+              <label htmlFor="email">
+                <FaUser />
+              </label>
+              <input
+                id="email"
+                name="email"
+                placeholder="name123@gmail.com..."
+                required
+                {...email}
+              />
+            </div>
+            <div className="flex align-items-center justify-content-center mb-10">
+              <label htmlFor="password">
+                <FaLock />
+              </label>
+              <input
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+                {...password}
+              />
+            </div>
+            <button type="submit" className="btn login-submit flex justify-content-center my-20">
+              LOGIN
             </button>
           </form>
-          <GoogleButton onClick={() => loginGoogle()} className="mt-10" />
-          <Button
-            icon={<FaFacebook className="mr-5" />}
-            onClick={() => loginFacebook()}
-            className="mt-10"
-          >
-            Login by Facebook
-          </Button>
+          <div className="center">
+            <p>Or login with</p>
+            <Button
+              icon={<FaFacebookF className="mr-5" />}
+              onClick={() => loginFacebook()}
+              className="btn-facebook mt-5 mr-10"
+            >FACEBOOK</Button>
+            <Button
+              icon={<FaGoogle className="mr-5" />}
+              onClick={() => loginGoogle()}
+              className="btn-google mt-5"
+            >GOOGLE</Button>
+          </div>
         </div>
       </div>
     </div>
